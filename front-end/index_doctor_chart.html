@@ -44,30 +44,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             ><i class="fas fa-bars"></i
                         ></a>
                     </li>
-                    <li class="nav-item dropdown d-none d-sm-inline-block">
-                        <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            id="navbarDropdown2"
-                            role="button"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                        >
-                            病歷填寫
-                        </a>
-                        <div
-                            class="dropdown-menu"
-                            aria-labelledby="navbarDropdown2"
-                        >
-                            <a class="dropdown-item" href="#">醫師資料修改</a>
-                            <!-- <div class="dropdown-divider"></div> -->
-                            <a class="dropdown-item" href="#">門診時刻修改</a>
-                        </div>
-                    </li>
-                    <!-- <li class="nav-item d-none d-sm-inline-block">
-                        <a href="#" class="nav-link">Others</a>
-                    </li> -->
+                    
                 </ul>
 
                 <!-- Right navbar links -->
@@ -456,7 +433,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0">醫師資料修改</h1>
+                                <h1 class="m-0">病歷填寫</h1>
                             </div>
                             <!-- /.col -->
                             <!-- 麵包屑 -->
@@ -482,14 +459,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Main content -->
                 <div class="content">
                     <div class="container-fluid">
-                        <div class="row"style="width: 600px; margin-left: 50px;">
+                        <div class="row"style="width: 600px; margin-left: 50px;display: flex;flex-wrap: nowrap">
                             <!-- left column -->
                             <div class="col-md-12" >
                                 <!-- jquery validation -->
                                 <div class="card card-primary" >
                                     <div class="card-header">
                                         <h3 class="card-title">
-                                            醫師檔案
+                                            病歷表
                                           
                                         </h3>
                                     </div>
@@ -500,11 +477,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <!-- 第一列 -->
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                <!-- text input -->
-                                                <div class="form-group">
-                                                    <label>醫師姓名</label>
-                                                    <input type="text" class="form-control" placeholder="請輸入醫師姓名">
-                                                </div>
+                                                    <!-- select -->
+                                                    <div class="form-group">
+                                                        <label>病患姓名</label>
+                                                        <select class="form-control">
+                                                        <option>陳大明</option>
+                                                        <option>陳二明</option>
+                                                        <option>option 3</option>
+                                                        <option>option 4</option>
+                                                        <option>option 5</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                 <div class="form-group">
@@ -517,34 +500,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                             <!-- 第二列 -->
                                             <div class="row">
-                                                <div class="col-sm-6">
-                                                <!-- text input -->
-                                                <div class="form-group">
-                                                    <label>密碼</label>
-                                                    <input type="password" class="form-control" placeholder="請輸入密碼">
-                                                </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>證書字號</label>
-                                                    <input type="text" class="form-control" placeholder="請輸入證書字號" d>
-                                                </div>
+                                                                                                                                <div class="col-sm-6">
+                                                    <!-- select -->
+                                                    <div class="form-group">
+                                                        <label>看診日期</label>
+                                                        <select class="form-control">
+                                                        <option>2022/08/16</option>
+                                                        <option>2022/08/17</option>
+                                                        <option>option 3</option>
+                                                        <option>option 4</option>
+                                                        <option>option 5</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!-- /第二列 -->                                            
 
                                             <!-- 第三列 -->
                                             <div class="form-group">
-                                                <label>信箱</label>
-                                                <input type="email" class="form-control" placeholder="Enter ...">
+                                                <label>病歷紀錄</label>
+                                                <textarea class="form-control textareaChart" rows="3" placeholder="請填寫就診紀錄"></textarea>
                                             </div>
 
                                             <div class="form-group">
-                                                <label>照片上傳</label>
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                    <label class="custom-file-label" for="exampleInputFile">選擇檔案</label>
-                                                </div>                                            
+                                                   
                                             </div>
                                             <!-- /第三列 -->
                                         </div>
@@ -561,7 +540,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                             <!-- right column -->
-                            <div class="col-md-6"></div>
+                            <div class="col-md-7">
+                            <!-- <div class="col-md-12" > -->
+                                <!-- jquery validation -->
+                                <div class="card card-primary" >
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            叫號
+                                          
+                                        </h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <form id="quickForm">
+                                        <div class="card-body">
+                                            <!-- 第一列 -->
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label id="time"></label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="form-group">
+                                                    <label>目前叫號 : <span>5</span>號
+
+                                                    </label>
+                                                </div>
+                                            </div>
+                                                
+                                            <!-- /第一列 -->
+                               
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <div class="card-footer">
+                                            <button  type="submit" class="btn btn-primary">下一號</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!--/.col (left) -->
+
+                            <!-- </div> -->
                             <!--/.col (right) -->
                         </div>
                         <!-- /.row -->
@@ -597,5 +618,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- AdminLTE App -->
         <script src="js/adminlte.min.js"></script>
+        <!-- vickyTsai's js -->
+        <script src="js/index_doctor_chartJs.js"></script>
     </body>
 </html>
