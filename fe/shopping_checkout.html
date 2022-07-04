@@ -51,6 +51,7 @@
         <!-- 我的CSS載入 -->
         <link href="css/all_style.css" rel="stylesheet" />
         <link href="css/style_shopping_cart.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/adminlte.min.css" />
     </head>
 
     <body>
@@ -328,7 +329,26 @@
                     >
                         <!-- <div class="bg-secondary d-flex flex-column p-5"> -->
                         <h4 class="text-white mb-4">您的訂單</h4>
-                        <i class="fa-solid fa-circle-plus"></i>展開明細
+                        <!-- <i class="fa-solid fa-circle-plus"></i>展開明細 -->
+                        <div class="card card-primary collapsed-card">
+                            <div class="card-header">
+                                <h3 class="card-title">展開明細</h3>
+
+                                <div class="card-tools">
+                                    <button
+                                        type="button"
+                                        class="btn btn-tool"
+                                        data-card-widget="collapse"
+                                    >
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <!-- /.card-tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">The body of the card</div>
+                            <!-- /.card-body -->
+                        </div>
                         <div class="checkout__order__products">
                             商品<span>總金額</span>
                         </div>
@@ -451,7 +471,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div
-                        class="bg-light h-100 d-flex flex-column p-5 wow zoomIn"
+                        class="bg-info h-100 d-flex flex-column p-5 wow zoomIn"
                         data-wow-delay="0.6s"
                         style="
                             visibility: visible;
@@ -459,18 +479,18 @@
                             animation-name: zoomIn;
                         "
                     >
-                        <p>請選擇付款方式</p>
+                        <h4 class="text-white mb-4">請選擇付款方式</h4>
                         <div class="checkout__input__checkbox">
-                            <label for="payment">
+                            <label for="cash">
                                 現金
-                                <input type="checkbox" id="payment" />
+                                <input type="checkbox" id="cash" />
                                 <span class="checkmark"></span>
                             </label>
                         </div>
                         <div class="checkout__input__checkbox">
-                            <label for="payment">
+                            <label for="credit-card">
                                 信用卡
-                                <input type="checkbox" id="payment" />
+                                <input type="checkbox" id="credit-card" />
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -673,5 +693,6 @@
         <!-- vickyTsai's JS -->
         <script src="js/materialize.js"></script>
         <script src="js/patientBookingQueryJs.js"></script>
+        <script src="js/adminlte.min.js"></script>
     </body>
 </html>
