@@ -9,23 +9,24 @@ DROP TABLE IF EXISTS `MEMBER`;
 CREATE TABLE `MEMBER` (
   `MEMID` VARCHAR(50) NOT NULL COMMENT '會員帳號',
   `EMAIL` VARCHAR(320) NOT NULL COMMENT '會員信箱',
+  `PASSWORD` VARCHAR(10) NOT NULL COMMENT '會員密碼',
   `FIRSTNAME` VARCHAR(10) NOT NULL COMMENT '會員姓氏',
   `LASTNAME` VARCHAR(10) NOT NULL COMMENT '會員名字',
-  `BIRTH` DATETIME NOT NULL COMMENT '會員生日',
+  `BIRTH` DATETIME COMMENT '會員生日',
   `CELLPHONE` VARCHAR(10) NOT NULL COMMENT '手機號碼',
-  `PHONE` VARCHAR(10) NOT NULL COMMENT '聯絡電話',
-  `ADDR` VARCHAR(50) NOT NULL COMMENT '居住地址',
-  PRIMARY KEY (`MEM_ID`))
+  `PHONE` VARCHAR(10) COMMENT '聯絡電話',
+  `ADDR` VARCHAR(50) COMMENT '居住地址',
+  PRIMARY KEY (`MEMID`))
 COMMENT = '會員資料';
 
 INSERT INTO 
-  `MEMBER` (`MEMID`, `EMAIL`, `FIRSTNAME`, `LASTNAME`, `BIRTH`, `CELLPHONE`, `PHONE`, `ADDR`)
+  `MEMBER` (`MEMID`, `EMAIL`, `PASSWORD`, `FIRSTNAME`, `LASTNAME`, `BIRTH`, `CELLPHONE`, `PHONE`, `ADDR`)
 VALUES
-  ('TGA001', 'tga001@gmail.com', '家豪', '李', '2022-04-11', '0910123456', '0234567891', '110台北市信義區市府路45號'),
-  ('TGA002', 'tga002@gmail.com', '美玉', '王', '2022-05-01', '0912345678', '0345678901', '407台中市西屯區惠來路二段101號'),
-  ('TGA003', 'tga003@gmail.com', '志明', '張', '2022-05-31', '0972345678', '0456789012', '717台南市仁德區文華路二段66號'),
-  ('TGA004', 'tga004@gmail.com', '淑華', '劉', '2022-06-05', '0954567890', '0567890123', '803高雄市鹽埕區大勇路1號'),
-  ('TGA005', 'tga005@gmail.com', '俊傑', '陳', '2022-08-25', '0987654321', '0678901234', '944屏東縣車城鄉後灣路2號');
+  ('TGA001', 'tga001@gmail.com', '123', '家豪', '李', '2022-04-11', '0910123456', '0234567891', '110台北市信義區市府路45號'),
+  ('TGA002', 'tga002@gmail.com', '123', '美玉', '王', '2022-05-01', '0912345678', '0345678901', '407台中市西屯區惠來路二段101號'),
+  ('TGA003', 'tga003@gmail.com', '123', '志明', '張', '2022-05-31', '0972345678', '0456789012', '717台南市仁德區文華路二段66號'),
+  ('TGA004', 'tga004@gmail.com', '123', '淑華', '劉', '2022-06-05', '0954567890', '0567890123', '803高雄市鹽埕區大勇路1號'),
+  ('TGA005', 'tga005@gmail.com', '123', '俊傑', '陳', '2022-08-25', '0987654321', '0678901234', '944屏東縣車城鄉後灣路2號');
 
 -- 訂單資料
 DROP TABLE IF EXISTS `ORDER`;
