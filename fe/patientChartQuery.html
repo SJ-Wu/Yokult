@@ -175,7 +175,7 @@
         <div class="container-fluid bg-primary py-5 hero-header mb-5">
             <div class="row py-3">
                 <div class="col-12 text-center">
-                    <h1 class="display-3 text-white animated zoomIn">看診進度</h1>
+                    <h1 class="display-3 text-white animated zoomIn">就診紀錄查詢</h1>
                     <!-- <a href="" class="h4 text-white">首頁</a>
                     <i class="far fa-circle text-white px-2"></i>
                     <a href="" class="h4 text-white">Services</a> -->
@@ -184,55 +184,58 @@
         </div>
         <!-- Hero End -->
 
-    <!-- Testimonial Start -->
-    <div class="container-fluid bg-primary bg-testimonial py-5 my-5 wow fadeInUp" data-wow-delay="0.1s">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-
-                          <!-- 想把block放照片上  要貼在這裡 -->
-
-                          
-                                  <!-- 看診進度開始 -->
-        <div class="col-xl-4 col-lg-6 wow slideInUp" data-wow-delay="0.1s" style="margin: auto">
-                    <div class="bg-light rounded h-100 p-5">
-                        <div class="section-title">
-                            <h5 class="position-relative d-inline-block text-primary text-uppercase">目前看診進度</h5>
-                            <h1 id="time" class="display-6 mb-4">2022.08.31 13:00</h1>
-                        </div>
-                        <div class="d-flex align-items-center mb-2" style="display: flex !important;  justify-content: space-around;">
-                            <!-- <i class="bi bi-geo-alt fs-1 text-primary me-3"></i> -->
-                            <div class="text-start">
-                                <table class="drCall">
-                                    <thead >
-                                        <tr>
-                                            <th>看診醫師</th>
-                                            <th>目前叫號</th>
-                                        </tr>
-                                    </thead>
-                                    <tr>
-                                        <td>陳花花</td>
-                                        <td>5</td>
-                                    </tr>
-                                    <tr>
-                                        <td>葉花花</td>
-                                        <td>5</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-
+         <!-- 查詢資訊填寫開始 -->
+        <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" style="width:800px; margin:auto;"data-wow-delay="0.6s">
+            <h1 class="text-white mb-4">請輸入就診紀錄查詢資料</h1>
+            <form method="post" action="#">
+                <div class="row g-3" >
+                    <div class="col-12 col-sm-6">
+                        <input type="text" name="IDcard" class="form-control bg-light border-0" placeholder="請輸入您的身分證字號" style="height: 55px;">
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <input type="email" class="form-control bg-light border-0" placeholder="Your Email" style="height: 55px;">
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-dark w-100 py-3" type="submit">按我查詢</button>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+        <!-- 查詢資訊填寫結束 -->
+        <!-- 查詢結果顯示 -->
+        <!-- Input addon -->
+            <div class="card card-info" style="width: 800px; margin: 40px auto;">
+              <div class="card-header">
+                <h3 class="card-title">查詢結果</h3>
+              </div>
+              <div class="card-body">
+                <!-- 下拉選單 -->
+                <div class="row g-3" >
+                    <div class="col-12 col-sm-6">
+                        <select class="form-select bg-light border-0" style="height: 55px;">
+                            <option selected>選擇看診日期</option>
+                            <option value="1">Service 1</option>
+                            <option value="2">Service 2</option>
+                            <option value="3">Service 3</option>
+                        </select>
                     </div>
                 </div>
-        <!-- 看診進度結束 -->
-               
+                <hr>
+                <!-- 看診醫師與就診紀錄內容 -->
+                <div class="col-12">
+                    <input type="text" class="form-control border-0 bg-light px-4" placeholder="看診醫師" style="height: 55px;" readonly>
+                </div>
+                <br>
+                <div class="col-12">
+                    <textarea class="textareaChart form-control border-0 bg-light px-4 py-3" rows="5" placeholder="就診紀錄內容" style="resize: none;" readonly></textarea>
+                </div>
+                <!-- 看診醫師與就診紀錄內容 結束 -->
+              </div>
+              <!-- /.card-body -->
             </div>
-        </div>
-    </div>
-    <!-- Testimonial End -->
-
-        
-    
-        
+            <!-- /.card -->
+        <!-- 查詢結果結束 -->
         <!-- Main content 到這邊結束 -->
         
         <div class="space"></div><!-- 間隔佔位用 -->
@@ -413,10 +416,9 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
-        <!-- vickyTsai's Javascript -->
+
+        <!-- VickyTsai's JS -->
         <script src="js/materialize.js"></script>
-        <script src="js/patientNowNumJs.js"></script>
-
-
+        <script src="js/patirntChartQueryJs.js"></script>
     </body>
 </html>

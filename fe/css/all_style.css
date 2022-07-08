@@ -2,6 +2,34 @@
     box-sizing: border-box;
 }
 
+/* patientCheckIn */
+@media (max-width:991px) {
+    .section-title h5::before {
+        position: absolute;
+        content: "";
+        width: 0px;
+        height: 3px;
+        right: -55px;
+        bottom: 11px;
+        background: var(--primary);
+    }
+    
+    .section-title h5::after {
+        position: absolute;
+        content: "";
+        width: 0px;
+        height: 3px;
+        right: -75px;
+        bottom: 11px;
+        background: var(--secondary);
+    }
+
+    #QRcodeDiv{
+        display: none;
+    };
+    
+}
+
 /* patientQuery */
 div.card-header{
     background-color: rgba(6, 163, 218, .7);
