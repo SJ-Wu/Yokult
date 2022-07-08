@@ -54,28 +54,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             aria-haspopup="true"
                             aria-expanded="false"
                         >
-                            Home
+                            醫師管理
                         </a>
                         <div
                             class="dropdown-menu"
                             aria-labelledby="navbarDropdown2"
                         >
-                            <a class="dropdown-item" href="#">醫師登入</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">看診進度</a>
-                            <a class="dropdown-item" href="#">預約查詢</a>
-                            <a class="dropdown-item" href="#">就診紀錄查詢</a>
+                            <a class="dropdown-item" href="#">醫師資料修改</a>
+                            <!-- <div class="dropdown-divider"></div> -->
+                            <a class="dropdown-item" href="#">門診時刻修改</a>
                         </div>
                     </li>
-                    <li class="nav-item d-none d-sm-inline-block">
+                    <!-- <li class="nav-item d-none d-sm-inline-block">
                         <a href="#" class="nav-link">Others</a>
-                    </li>
+                    </li> -->
                 </ul>
 
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Notifications Dropdown Menu -->
-                    <li class="nav-item dropdown">
+                    <!-- 小鈴鐺 -->
+                    <!-- <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <i class="far fa-bell"></i>
                             <span class="badge badge-warning navbar-badge"
@@ -100,7 +99,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 >See All Notifications</a
                             >
                         </div>
-                    </li>
+                    </li> -->
+                    <!-- 小鈴鐺結束 -->
                     <li class="nav-item">
                         <a
                             class="nav-link"
@@ -456,20 +456,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0">Starter Page</h1>
+                                <h1 class="m-0">醫師資料修改</h1>
                             </div>
                             <!-- /.col -->
-                            <div class="col-sm-6">
+                            <!-- 麵包屑 -->
+                            <!-- <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item">
                                         <a href="#">Home</a>
                                     </li>
                                     <li class="breadcrumb-item active">
-                                        Starter Page
+                                        病歷系統
                                     </li>
                                 </ol>
-                            </div>
+                            </div> -->
                             <!-- /.col -->
+                            <!-- 麵包屑 -->
                         </div>
                         <!-- /.row -->
                     </div>
@@ -480,81 +482,84 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Main content -->
                 <div class="content">
                     <div class="container-fluid">
-                        <div class="row">
+                        <div class="row"style="width: 600px; margin-left: 50px;">
                             <!-- left column -->
-                            <div class="col-md-12">
+                            <div class="col-md-12" >
                                 <!-- jquery validation -->
-                                <div class="card card-primary">
+                                <div class="card card-primary" >
                                     <div class="card-header">
                                         <h3 class="card-title">
-                                            Quick Example
-                                            <small>jQuery Validation</small>
+                                            醫師檔案
+                                          
                                         </h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
                                     <form id="quickForm">
                                         <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1"
-                                                    >Email address</label
-                                                >
-                                                <input
-                                                    type="email"
-                                                    name="email"
-                                                    class="form-control"
-                                                    id="exampleInputEmail1"
-                                                    placeholder="Enter email"
-                                                />
-                                            </div>
-                                            <div class="form-group">
-                                                <label
-                                                    for="exampleInputPassword1"
-                                                    >Password</label
-                                                >
-                                                <input
-                                                    type="password"
-                                                    name="password"
-                                                    class="form-control"
-                                                    id="exampleInputPassword1"
-                                                    placeholder="Password"
-                                                />
-                                            </div>
-                                            <div class="form-group mb-0">
-                                                <div
-                                                    class="custom-control custom-checkbox"
-                                                >
-                                                    <input
-                                                        type="checkbox"
-                                                        name="terms"
-                                                        class="custom-control-input"
-                                                        id="exampleCheck1"
-                                                    />
-                                                    <label
-                                                        class="custom-control-label"
-                                                        for="exampleCheck1"
-                                                        >I agree to the
-                                                        <a href="#"
-                                                            >terms of service</a
-                                                        >.</label
-                                                    >
+                                            <!-- 第一列 -->
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                <!-- text input -->
+                                                <div class="form-group">
+                                                    <label>醫師姓名</label>
+                                                    <input type="text" class="form-control" placeholder="請輸入醫師姓名">
+                                                </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>醫師編號</label>
+                                                    <input type="text" class="form-control" placeholder="請輸入醫師編號" readonly>
+                                                </div>
                                                 </div>
                                             </div>
+                                            <!-- /第一列 -->
+
+                                            <!-- 第二列 -->
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                <!-- text input -->
+                                                <div class="form-group">
+                                                    <label>密碼</label>
+                                                    <input type="password" class="form-control" placeholder="請輸入密碼">
+                                                </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>證書字號</label>
+                                                    <input type="text" class="form-control" placeholder="請輸入證書字號" d>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <!-- /第二列 -->                                            
+
+                                            <!-- 第三列 -->
+                                            <div class="form-group">
+                                                <label>信箱</label>
+                                                <input type="email" class="form-control" placeholder="Enter ...">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>照片上傳</label>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                    <label class="custom-file-label" for="exampleInputFile">選擇檔案</label>
+                                                </div>                                            
+                                            </div>
+                                            <!-- /第三列 -->
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <button
-                                                type="submit"
-                                                class="btn btn-primary"
-                                            >
-                                                Submit
-                                            </button>
+                                            <button  type="submit" class="btn btn-primary">儲存</button>
                                         </div>
                                     </form>
                                 </div>
                                 <!-- /.card -->
                             </div>
                             <!--/.col (left) -->
+
+
+
                             <!-- right column -->
                             <div class="col-md-6"></div>
                             <!--/.col (right) -->
