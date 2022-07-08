@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+<!-- 參考 ADMINLTE-3.2.0套件包/chartjs.html -->
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
@@ -75,32 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Notifications Dropdown Menu -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge"
-                                >3</span
-                            >
-                        </a>
-                        <div
-                            class="dropdown-menu dropdown-menu-lg dropdown-menu-right"
-                        >
-                            <span class="dropdown-item dropdown-header"
-                                >3 Notifications</span
-                            >
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-file mr-2"></i> 3 new reports
-                                <span class="float-right text-muted text-sm"
-                                    >2 days</span
-                                >
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item dropdown-footer"
-                                >See All Notifications</a
-                            >
-                        </div>
-                    </li>
+                  
                     <li class="nav-item">
                         <a
                             class="nav-link"
@@ -153,7 +130,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             />
                         </div>
                         <div class="info">
-                            <a href="#" class="d-block">爆肝分析師G</a>
+                            <a href="#" class="d-block">藍莓汁吉</a>
                         </div>
                     </div>
 
@@ -384,92 +361,353 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
                             <li class="nav-item menu-open">
                                 <a href="#" class="nav-link active">
-                                    <i class="fa-solid fa-chart-pie"></i>
+                                <i class="fa-solid fa-chart-pie"></i>
                                     <p>
-                                        分析系統
-                                        <i class="right fas fa-angle-left"></i>
+                                    分析系統
+                                     <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i
-                                                class="far fa-circle nav-icon"
-                                            ></i>
-                                            <p>病歷分析</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i
-                                                class="far fa-circle nav-icon"
-                                            ></i>
-                                            <p>商品供需分析</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i
-                                                class="far fa-circle nav-icon"
-                                            ></i>
-                                            <p>衛教主題喜好分析</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i
-                                                class="far fa-circle nav-icon"
-                                            ></i>
-                                            <p>醫師評價</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                             <ul class="nav nav-treeview">
+                                 <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                         <i
+                                            class="far fa-circle nav-icon"
+                                        ></i>
+                                     <p>病歷分析</p>
+                                </a>
+                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="fa-solid fa-address-card"></i>
-                                    <p>
-                                        會員管理
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
+                                 <a href="#" class="nav-link">
+                                    <i
+                                         class="far fa-circle nav-icon"
+                                     ></i>
+                                    <p>商品供需分析</p>
                                 </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i
-                                                class="far fa-circle nav-icon"
-                                            ></i>
-                                            <p>會員資料管理</p>
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                 <i
+                                    class="far fa-circle nav-icon"
+                                ></i>
+                            <p>衛教主題喜好分析</p>
+                            </a>
+                        </li>
+                         <li class="nav-item">
+                             <a href="#" class="nav-link">
+                                <i
+                                     class="far fa-circle nav-icon"
+                                    ></i>
+                                    <p>醫師評價</p>
+                                 </a>
+                            </li>
+                         </ul>
+                     </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                             <i class="fa-solid fa-address-card"></i>
+                            <p>
+                                會員管理
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                         </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                                 <a href="#" class="nav-link">
+                                     <i
+                                        class="far fa-circle nav-icon"
+                                    ></i>
+                                    <p>會員資料管理</p>
+                                 </a>
+                             </li>
                         </ul>
-                    </nav>
-                    <!-- /.sidebar-menu -->
+                     </li>
+                 </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+    <!-- Content Wrapper. Contains page content 主頁面欄位-->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                 <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">分析報表</h1>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            
+                            <!-- Navbar Search -->
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              data-widget="navbar-search"
+              href="#"
+              role="button"
+            >
+              <i class="fas fa-search"></i>
+            </a>
+            <div class="navbar-search-block">
+              <form class="form-inline">
+                <div class="input-group input-group-sm">
+                  <input
+                    class="form-control form-control-navbar"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                  <div class="input-group-append">
+                    <button class="btn btn-navbar" type="submit">
+                      <i class="fas fa-search"></i>
+                    </button>
+                    <button
+                      class="btn btn-navbar"
+                      type="button"
+                      data-widget="navbar-search"
+                    >
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
                 </div>
-                <!-- /.sidebar -->
-            </aside>
-            <!-- Content Wrapper. Contains page content 主頁面欄位-->
-            <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <div class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1 class="m-0">Starter Page</h1>
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item">
-                                        <a href="#">Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item active">
-                                        Starter Page
-                                    </li>
-                                </ol>
-                            </div>
+              </form>
+            </div>
+          </li>
+                        </ol>
+                     </div>
+<!-- 參考ADAMINLTE-3.2.0套件包 /index.html-->
+            <!-- Small boxes (Stat box) -->
+            <section class="content">
+                <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3>150</h3>
+  
+                  <p>今日下單量</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">查看 <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>53<sup style="font-size: 20px">%</sup></h3>
+  
+                  <p>今日滿意度</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="#" class="small-box-footer">查看<i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3>39</h3>
+  
+                  <p>今日來客數</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer">查看 <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-danger">
+                <div class="inner">
+                  <h3>22</h3>
+  
+                  <p>今日預約人數</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">查看 <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+          </div>
+          <!-- /.row -->
+          <br>
+          <div class="row">
+
+
+                             <!-- AREA CHART -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">來客數分析</h3>
+  
+                      <div class="card-tools">
+                        <button
+                          type="button"
+                          class="btn btn-tool"
+                          data-card-widget="collapse"
+                        >
+                          <i class="fas fa-minus"></i>
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-tool"
+                          data-card-widget="remove"
+                        >
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="chart">
+                        <canvas
+                          id="areaChart"
+                          style="
+                            min-height: 250px;
+                            height: 250px;
+                            max-height: 250px;
+                            max-width: 100%;
+                          "
+                        ></canvas>
+                      </div>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+                  <!-- /.card -->
+
+
+                  <!-- LINE CHART -->
+                <div class="card card-info">
+                    <div class="card-header">
+                      <h3 class="card-title">商品分析</h3>
+  
+                      <div class="card-tools">
+                        <button
+                          type="button"
+                          class="btn btn-tool"
+                          data-card-widget="collapse"
+                        >
+                          <i class="fas fa-minus"></i>
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-tool"
+                          data-card-widget="remove"
+                        >
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="chart">
+                        <canvas
+                          id="lineChart"
+                          style="
+                            min-height: 250px;
+                            height: 250px;
+                            max-height: 250px;
+                            max-width: 100%;
+                          "
+                        ></canvas>
+                      </div>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+                  <!-- /.card -->
+  
+
+
+                            <!-- BAR CHART -->
+                <div class="card card-success">
+                    <div class="card-header">
+                      <h3 class="card-title">滿意度</h3>
+  
+                      <div class="card-tools">
+                        <button
+                          type="button"
+                          class="btn btn-tool"
+                          data-card-widget="collapse"
+                        >
+                          <i class="fas fa-minus"></i>
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-tool"
+                          data-card-widget="remove"
+                        >
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="chart">
+                        <canvas
+                          id="barChart"
+                          style="
+                            min-height: 250px;
+                            height: 250px;
+                            max-height: 250px;
+                            max-width: 100%;
+                          "
+                        ></canvas>
+                      </div>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+                  <!-- /.card -->
+                            
+                            
+                <!-- DONUT CHART -->
+                <div class="card card-danger">
+                    <div class="card-header">
+                      <h3 class="card-title">顧客年齡層</h3>
+  
+                      <div class="card-tools">
+                        <button
+                            type="button"
+                            class="btn btn-tool"
+                            data-card-widget="remove"
+                            >
+                         <i class="fas fa-times"></i>
+                        </button>
+                          <i class="fas fa-minus"></i>
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-tool"
+                          data-card-widget="remove"
+                        >
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <canvas
+                        id="donutChart"
+                        style="
+                          min-height: 250px;
+                          height: 250px;
+                          max-height: 250px;
+                          max-width: 100%;
+                        "
+                      ></canvas>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+                  <!-- /.card -->
+                            
                             <!-- /.col -->
                         </div>
                         <!-- /.row -->
@@ -479,93 +717,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- /.content-header -->
 
                 <!-- Main content -->
-                <div class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <!-- left column -->
-                            <div class="col-md-12">
-                                <!-- jquery validation -->
-                                <div class="card card-primary">
-                                    <div class="card-header">
-                                        <h3 class="card-title">
-                                            Quick Example
-                                            <small>jQuery Validation</small>
-                                        </h3>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <!-- form start -->
-                                    <form id="quickForm">
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1"
-                                                    >Email address</label
-                                                >
-                                                <input
-                                                    type="email"
-                                                    name="email"
-                                                    class="form-control"
-                                                    id="exampleInputEmail1"
-                                                    placeholder="Enter email"
-                                                />
-                                            </div>
-                                            <div class="form-group">
-                                                <label
-                                                    for="exampleInputPassword1"
-                                                    >Password</label
-                                                >
-                                                <input
-                                                    type="password"
-                                                    name="password"
-                                                    class="form-control"
-                                                    id="exampleInputPassword1"
-                                                    placeholder="Password"
-                                                />
-                                            </div>
-                                            <div class="form-group mb-0">
-                                                <div
-                                                    class="custom-control custom-checkbox"
-                                                >
-                                                    <input
-                                                        type="checkbox"
-                                                        name="terms"
-                                                        class="custom-control-input"
-                                                        id="exampleCheck1"
-                                                    />
-                                                    <label
-                                                        class="custom-control-label"
-                                                        for="exampleCheck1"
-                                                        >I agree to the
-                                                        <a href="#"
-                                                            >terms of service</a
-                                                        >.</label
-                                                    >
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /.card-body -->
-                                        <div class="card-footer">
-                                            <button
-                                                type="submit"
-                                                class="btn btn-primary"
-                                            >
-                                                Submit
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- /.card -->
-                            </div>
-                            <!--/.col (left) -->
-                            <!-- right column -->
-                            <div class="col-md-6"></div>
-                            <!--/.col (right) -->
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
-                </div>
-                <!-- /.content -->
-            </div>
+                
+                 
+                 <!-- Quick Example -->
+            <div class="content">
+                <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                <div class="col-md-12">
+                   
+                
             <!-- ============ Footer段落 ============ -->
             <footer class="main-footer">
                 <!-- To the right -->
@@ -593,5 +754,164 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- AdminLTE App -->
         <script src="js/adminlte.min.js"></script>
+        <!-- ChartJS -->
+        <script src="plugins/bigdata.js/Chart.min.js"></script>
+        <script>
+                 $(function () {
+        /* ChartJS
+         * -------
+         * Here we will create a few charts using ChartJS
+         */
+
+        //--------------
+        //- AREA CHART -
+        //--------------
+
+        // Get context with jQuery - using jQuery's .get() method.
+        var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
+
+        var areaChartData = {
+          labels: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+          ],
+          datasets: [
+            {
+              label: "Digital Goods",
+              backgroundColor: "rgba(60,141,188,0.9)",
+              borderColor: "rgba(60,141,188,0.8)",
+              pointRadius: false,
+              pointColor: "#3b8bba",
+              pointStrokeColor: "rgba(60,141,188,1)",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(60,141,188,1)",
+              data: [28, 48, 40, 19, 86, 27, 90],
+            },
+            {
+              label: "Electronics",
+              backgroundColor: "rgba(210, 214, 222, 1)",
+              borderColor: "rgba(210, 214, 222, 1)",
+              pointRadius: false,
+              pointColor: "rgba(210, 214, 222, 1)",
+              pointStrokeColor: "#c1c7d1",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: [65, 59, 80, 81, 56, 55, 40],
+            },
+          ],
+        };
+
+        var areaChartOptions = {
+          maintainAspectRatio: false,
+          responsive: true,
+          legend: {
+            display: false,
+          },
+          scales: {
+            xAxes: [
+              {
+                gridLines: {
+                  display: false,
+                },
+              },
+            ],
+            yAxes: [
+              {
+                gridLines: {
+                  display: false,
+                },
+              },
+            ],
+          },
+        };
+
+        // This will get the first returned node in the jQuery collection.
+        new Chart(areaChartCanvas, {
+          type: "line",
+          data: areaChartData,
+          options: areaChartOptions,
+        });
+
+        //-------------
+        //- LINE CHART -
+        //--------------
+        var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
+        var lineChartOptions = $.extend(true, {}, areaChartOptions);
+        var lineChartData = $.extend(true, {}, areaChartData);
+        lineChartData.datasets[0].fill = false;
+        lineChartData.datasets[1].fill = false;
+        lineChartOptions.datasetFill = false;
+
+        var lineChart = new Chart(lineChartCanvas, {
+          type: "line",
+          data: lineChartData,
+          options: lineChartOptions,
+        });
+
+
+        //-------------
+        //- DONUT CHART -
+        //-------------
+        // Get context with jQuery - using jQuery's .get() method.
+        var donutChartCanvas = $("#donutChart").get(0).getContext("2d");
+        var donutData = {
+          labels: ["5~10歲", "11~20歲", "21~30歲", "31~40歲", "41~50歲", "50歲以上"],
+                    //   紅     綠        橘         淺藍       深藍        灰
+          datasets: [
+            {
+              data: [200, 400, 700, 600, 300, 100],
+              backgroundColor: [
+                "#f56954",
+                "#00a65a",
+                "#f39c12",
+                "#00c0ef",
+                "#3c8dbc",
+                "#d2d6de",
+              ],
+            },
+          ],
+        };
+        var donutOptions = {
+          maintainAspectRatio: false,
+          responsive: true,
+        };
+        //Create pie or douhnut chart
+        // You can switch between pie and douhnut using the method below.
+        new Chart(donutChartCanvas, {
+          type: "doughnut",
+          data: donutData,
+          options: donutOptions,
+        });
+
+         //-------------
+        //- BAR CHART -
+        //-------------
+        var barChartCanvas = $("#barChart").get(0).getContext("2d");
+        var barChartData = $.extend(true, {}, areaChartData);
+        var temp0 = areaChartData.datasets[0];
+        var temp1 = areaChartData.datasets[1];
+        barChartData.datasets[0] = temp1;
+        barChartData.datasets[1] = temp0;
+
+        var barChartOptions = {
+          responsive: true,
+          maintainAspectRatio: false,
+          datasetFill: false,
+        };
+
+        new Chart(barChartCanvas, {
+          type: "bar",
+          data: barChartData,
+          options: barChartOptions,
+        });
+
+           });
+
+        </script>
     </body>
 </html>
