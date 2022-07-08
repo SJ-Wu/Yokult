@@ -46,16 +46,15 @@
         <link href="css/style.css" rel="stylesheet" />
 
         <!-- 我的CSS載入 -->
-        <link href="css/all_style.css"   rel="stylesheet"/>
-
- 
+        <link href="css/all_style.css" rel="stylesheet" />
     </head>
 
     <body>
         <!-- Spinner Start -->
         <div
             id="spinner"
-            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"        >
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+        >
             <div class="spinner-grow text-primary m-1" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -167,14 +166,15 @@
         </nav>
         <!-- Navbar End -->
 
-
         <!-- Main content 從這邊開始改-->
-            
+
         <!-- 中間夾Hero Start -->
         <div class="container-fluid bg-primary py-5 hero-header mb-5">
             <div class="row py-3">
                 <div class="col-12 text-center">
-                    <h1 class="display-3 text-white animated zoomIn">註冊會員</h1>
+                    <h1 class="display-3 text-white animated zoomIn">
+                        註冊會員
+                    </h1>
                     <!-- <a href="" class="h4 text-white">首頁</a>
                     <i class="far fa-circle text-white px-2"></i>
                     <a href="" class="h4 text-white">Services</a> -->
@@ -183,169 +183,278 @@
         </div>
         <!-- Hero End -->
 
-         <!-- 登入開始 -->
-        <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" style="width:600px; margin:auto;"data-wow-delay="0.6s">
-                    
-                    <!-- </div> -->
+        <!-- 登入開始 -->
+        <div
+            class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn"
+            style="width: 600px; margin: auto"
+            data-wow-delay="0.6s"
+        >
+            <!-- </div> -->
+            <div class="login-box">
+                <!-- /.login-logo -->
+                <div class="card card-outline card-primary">
+                    <div class="card-header text-center">
+                        <a href="../../index2.html" class="h1">
+                            <h3 class="card-title">牙樂多牙醫診所</h3>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <p class="login-box-msg">註冊會員</p>
 
-
-                        <div class="login-box">
-                            <!-- /.login-logo -->
-                            <div class="card card-outline card-primary">
-                                <div class="card-header text-center">
-                                <a href="../../index2.html" class="h1"><h3 class="card-title">牙樂多牙醫診所</h3></a>
+                        <form>
+                            <div class="input-group mb-3">
+                                <input
+                                    type="text"
+                                    id="memID"
+                                    class="form-control"
+                                    placeholder="請輸入帳號"
+                                />
+                                <div class="input-group-append">
+                                    <div
+                                        class="input-group-text"
+                                        style="height: 100%"
+                                    >
+                                        <span class="fas fa-user"></span>
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                <p class="login-box-msg">註冊會員</p>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input
+                                    type="password"
+                                    id="memPassword"
+                                    class="form-control"
+                                    placeholder="請輸入密碼"
+                                />
+                                <div class="input-group-append">
+                                    <div
+                                        class="input-group-text"
+                                        style="height: 100%"
+                                    >
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input
+                                    type="password"
+                                    id="memPasswordConfirm"
+                                    class="form-control"
+                                    placeholder="請再次輸入密碼"
+                                />
+                                <div class="input-group-append">
+                                    <div
+                                        class="input-group-text"
+                                        style="height: 100%"
+                                    >
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input
+                                    type="text"
+                                    id="memLastName"
+                                    class="form-control"
+                                    placeholder="姓氏"
+                                />
+                                <input
+                                    type="text"
+                                    id="memFirstName"
+                                    class="form-control"
+                                    placeholder="名字"
+                                />
+                                <div class="input-group-append">
+                                    <div
+                                        class="input-group-text"
+                                        style="height: 100%"
+                                    >
+                                        <span class="fas fa-user"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input
+                                    type="date"
+                                    id="memBirth"
+                                    class="form-control"
+                                    placeholder="出生日期"
+                                />
+                                <div class="input-group-append">
+                                    <div
+                                        class="input-group-text"
+                                        style="height: 100%"
+                                    >
+                                        <span
+                                            ><i class="fa fa-calendar"></i
+                                        ></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input
+                                    type="email"
+                                    id="memEmail"
+                                    class="form-control"
+                                    placeholder="信箱"
+                                />
+                                <div class="input-group-append">
+                                    <div
+                                        class="input-group-text"
+                                        style="height: 100%"
+                                    >
+                                        <span
+                                            class="fa fa-envelope-open"
+                                        ></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input
+                                    type="text"
+                                    id="memCellPhone"
+                                    class="form-control"
+                                    placeholder="手機號碼"
+                                />
+                                <div class="input-group-append">
+                                    <div
+                                        class="input-group-text"
+                                        style="height: 100%"
+                                    >
+                                        <span class="fa fa-phone-alt"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input
+                                    type="text"
+                                    id="memAddress"
+                                    class="form-control"
+                                    placeholder="居住地址"
+                                />
+                                <div class="input-group-append">
+                                    <div
+                                        class="input-group-text"
+                                        style="height: 100%"
+                                    >
+                                        <span class="bi-geo-alt"></span>
+                                    </div>
+                                </div>
+                            </div>
 
-                                <form action="#" method="post">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="請輸入帳號">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span class="fas fa-user"></span>
-                                            </div>
-                                        </div>
+                            <div class="input-group mb-3">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="請輸入驗證碼(未啟用)"
+                                />
+                                <div class="input-group-append">
+                                    <div
+                                        class="input-group-text"
+                                        style="height: 100%"
+                                    >
+                                        <img
+                                            src="img/captcha.png"
+                                            style="width: 150px"
+                                            alt=""
+                                        />
                                     </div>
-                                    <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="請輸入密碼">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span class="fas fa-lock"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="請再次輸入密碼">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span class="fas fa-lock"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="姓名">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span class="fas fa-user"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="date" class="form-control" placeholder="出生日期">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span ><i class="fa fa-calendar"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                     <div class="input-group mb-3">
-                                        <input type="email" class="form-control" placeholder="信箱">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span class="fa fa-envelope-open"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="手機號碼">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span class="fa fa-phone-alt "></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="居住地址">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span class="bi-geo-alt "></span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                </div>
+                            </div>
 
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="請輸入驗證碼">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                            <img src="img/captcha.png" style="width: 150px;" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                    <div class="col-8" style="width:35%">
-                                        <div class="icheck-primary">
-                                        <input type="checkbox" id="remember">
+                            <div class="row">
+                                <div class="col-8" style="width: 35%">
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="remember" />
                                         <label for="remember">
-                                            記住我
+                                            記住我(未啟用)
                                         </label>
-                                        </div>
                                     </div>
-                                    <!-- /.col -->
-                                    <!-- <div class="col-4">
+                                </div>
+                                <!-- /.col -->
+                                <!-- <div class="col-4">
                                         <button type="submit" class="btn btn-primary btn-block">註冊</button>
                                     </div> -->
-                                    <!-- 按鈕開始 -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                <!-- 按鈕開始 -->
+                                <button
+                                    type="button"
+                                    id="btn_signup"
+                                    class="btn btn-primary"
+                                    data-toggle="modal"
+                                    data-target="#exampleModal"
+                                >
                                     註冊
-                                        </button>
+                                </button>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <!-- Modal -->
+                                <div
+                                    class="modal fade"
+                                    id="exampleModal"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true"
+                                >
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            ...
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
+                                            <div class="modal-header">
+                                                <h5
+                                                    class="modal-title"
+                                                    id="exampleModalLabel"
+                                                >
+                                                    Modal title
+                                                </h5>
+                                                <button
+                                                    type="button"
+                                                    class="close"
+                                                    data-dismiss="modal"
+                                                    aria-label="Close"
+                                                >
+                                                    <span aria-hidden="true"
+                                                        >&times;</span
+                                                    >
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">...</div>
+                                            <div class="modal-footer">
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-secondary"
+                                                    data-dismiss="modal"
+                                                >
+                                                    Close
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                >
+                                                    Save changes
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    </div>
-                                    <!-- 按鈕結束 -->
-
-
-
-
-                                    <!-- /.col -->
-                                    </div>
-                                </form>
-
                                 </div>
-                                <!-- /.card-body -->
+                                <!-- 按鈕結束 -->
+                                <!-- /.col -->
                             </div>
-                            <!-- /.card -->
-                        </div>
-                        <!-- /.login-box -->
-
-<!-- 
-                    <div class="col-12">
-                        <button class="btn btn-dark w-100 py-3" type="submit">按我查詢</button>
-                    </div> -->
-                    
+                        </form>
+                    </div>
+                    <!-- /.card-body -->
                 </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.login-box -->
         </div>
-        
-        
-    
-        
+
         <!-- Main content 到這邊結束 -->
-        
-        <div class="space"></div><!-- 間隔佔位用 -->
+
+        <div class="space"></div>
+        <!-- 間隔佔位用 -->
         <!-- Footer Start -->
         <div
             class="container-fluid bg-dark text-light py-5 wow fadeInUp"
             data-wow-delay="0.3s"
-            style="margin-top: -75px">
+            style="margin-top: -75px"
+        >
             <div class="container pt-5">
                 <div class="row g-5 pt-4">
                     <div class="col-lg-3 col-md-6">
@@ -506,6 +615,7 @@
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="lib/wow/wow.min.js"></script>
         <script src="lib/easing/easing.min.js"></script>
         <script src="lib/waypoints/waypoints.min.js"></script>
@@ -518,11 +628,11 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script src="js/member_signup.js"></script>
         <script>
-            $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
-            })
+            $("#myModal").on("shown.bs.modal", function () {
+                $("#myInput").trigger("focus");
+            });
         </script>
-        
     </body>
 </html>
