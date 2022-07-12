@@ -12,7 +12,10 @@ window.onload = (e) => {
         member["memAddress"] = document.getElementById("memAddress").value;
         console.log(member);
         axios
-            .post("http://localhost:8080/Yokult/member/register", member)
+            .post(
+                "http://localhost:8080/my-first-project/api/0.01/member/register",
+                member
+            )
             .then((response) => {
                 let msg = response.data["msg"];
                 if (msg === "success") {
