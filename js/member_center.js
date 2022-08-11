@@ -1,18 +1,34 @@
 window.onload = () => {
+    const APIURL = URL + MEMBER;
+    const token = sessionStorage.getItem("token");
+    console.log(token);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios
-        .post("http://localhost:8080/yokult/api/0.02/member/login", {
-            memID: "TGA004",
-            memPassword: "123",
-        })
+        .get(APIURL + "/TGA004")
         .then((response) => {
             console.log(response.data);
-            let msg = response.data["msg"];
-            if (msg === "success") {
-                let member = {};
-                member = response.data["member"];
-                console.log(member);
-                addList(member);
+            member = response.data;
+            console.log(member);
+            addList(member);
+        })
+        .catch(function (error) {
+            console.log("Error:");
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log("Error", error.message);
             }
+            console.log(error.config);
         });
     $("#memberInfo").on("click", "#btn_modify_member", (e) => {
         let member = {};
