@@ -19,11 +19,11 @@
 
         <!-- Icon Font Stylesheet -->
         <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
             rel="stylesheet"
         />
         <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
             rel="stylesheet"
         />
 
@@ -46,11 +46,9 @@
         <link href="css/style.css" rel="stylesheet" />
 
         <!-- 我的CSS載入 -->
-        <link href="css/all_style.css"   rel="stylesheet"/>
-
- 
+        <link href="css/all_style.css" rel="stylesheet" />
     </head>
-   
+
     <body>
         <header id="header"></header>
         <!-- Main content 從這邊開始改-->
@@ -58,7 +56,9 @@
         <div class="container-fluid bg-primary py-5 hero-header mb-5">
             <div class="row py-3">
                 <div class="col-12 text-center">
-                    <h1 class="display-3 text-white animated zoomIn">會員資料</h1>
+                    <h1 class="display-3 text-white animated zoomIn">
+                        會員資料
+                    </h1>
                     <!-- <a href="" class="h4 text-white">首頁</a>
                     <i class="far fa-circle text-white px-2"></i>
                     <a href="" class="h4 text-white">Services</a> -->
@@ -67,142 +67,45 @@
         </div>
         <!-- Hero End -->
 
-         <!-- 登入開始 -->
-        <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" style="width:600px; margin:auto;"data-wow-delay="0.6s">
-                    
-                    <!-- </div> -->
+        <!-- 會員資料 -->
+        <div
+            class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn"
+            style="width: 600px; margin: auto"
+            data-wow-delay="0.6s"
+        >
+            <!-- </div> -->
 
+            <div class="login-box">
+                <!-- /.login-logo -->
+                <div class="card card-outline card-primary">
+                    <div class="card-header text-center">
+                        <a href="../../index2.html" class="h1"
+                            ><h3 class="card-title">個人資料</h3></a
+                        >
+                    </div>
+                    <div class="card-body">
+                        <form action="#" method="post" id="memberInfo">
+                            <!-- JavaScript -->
 
-                        <div class="login-box">
-                            <!-- /.login-logo -->
-                            <div class="card card-outline card-primary">
-                                <div class="card-header text-center">
-                                <a href="../../index2.html" class="h1"><h3 class="card-title">個人資料</h3></a>
-                                </div>
-                                <div class="card-body">
+                            <!-- /.col -->
+                        </form>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.login-box -->
 
-                                <form action="#" method="post">
-                                    <label for="disabledTextInput" class="form-label">帳號</label>
-                                    <div class="input-group mb-3">
-                                        <input type="text" id="disabledTextInput" class="form-control" value="tibame2022" disabled>
-                                        </div>
-                                    <label for="mem_id" class="form-label"></label>姓名</label>
-                                    <div class="input-group mb-3">
-                                        <input type="text" id="mem_name" class="form-control" placeholder="請輸入姓名" value="阿基拉">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span class="fas fa-user"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <label for="mem_email" class="form-label"></label>信箱</label>
-                                    <div class="input-group mb-3">
-                                        <input type="email" class="form-control" placeholder="請輸入信箱" value="tibame2022@gmail.com">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span class="fa fa-envelope-open"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <label for="mem_id" class="form-label"></label>密碼</label>
-                                    <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="請輸入密碼" value="password">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span class="fas fa-lock"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <label for="mem_id" class="form-label"></label>再次確認密碼</label>
-                                    <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="請輸入密碼" value="password">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span class="fas fa-lock"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <label for="mem_phone" class="form-label"></label>手機號碼</label>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="手機號碼" value="0912-123456">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span class="fa fa-phone-alt "></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <label for="mem_phone" class="form-label"></label>出生日期</label>
-                                    <div class="input-group mb-3">
-                                        <input type="date" class="form-control" placeholder="出生日期" value="2022-06-27">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span ><i class="fa fa-calendar"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <label for="mem_phone" class="form-label"></label>居住地址</label>
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="居住地址" value="100台北市中正區濟南路一段321號">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text" style="height:100%">
-                                                <span class="bi-geo-alt "></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- /.col -->
-                                    <!-- <div class="col-4">
-                                        <button type="submit" class="btn btn-primary btn-block">註冊</button>
-                                    </div> -->
-                                    <!-- 按鈕開始 -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                    修改
-                                        </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            ...
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <!-- 按鈕結束 -->
-                                    <!-- /.col -->
-                                    </div>
-                                </form>
-
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
-                        </div>
-                        <!-- /.login-box -->
-
-<!-- 
+            <!-- 
                     <div class="col-12">
                         <button class="btn btn-dark w-100 py-3" type="submit">按我查詢</button>
                     </div> -->
-                    
-                </div>
         </div>
+
         <!-- Main content 到這邊結束 -->
-        
-        <div class="space"></div><!-- 間隔佔位用 -->
+
+        <div class="space"></div>
+        <!-- 間隔佔位用 -->
         <footer id="footer"></footer>
 
         <!-- Back to Top -->
@@ -215,6 +118,7 @@
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="lib/wow/wow.min.js"></script>
         <script src="lib/easing/easing.min.js"></script>
         <script src="lib/waypoints/waypoints.min.js"></script>
@@ -227,11 +131,11 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script src="js/member_center.js"></script>
         <script>
-            $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').trigger('focus')
-            })
+            $("#myModal").on("shown.bs.modal", function () {
+                $("#myInput").trigger("focus");
+            });
         </script>
-        
     </body>
 </html>
