@@ -3,6 +3,9 @@ window.onload = () => {
     const memID = sessionStorage.getItem("memID");
     const token = sessionStorage.getItem("token");
     console.log(token);
+    if (token === null) {
+        window.location.replace("index.html");
+    }
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios.defaults.headers.post["Content-Type"] =
         "application/json;charse=UTF-8";
