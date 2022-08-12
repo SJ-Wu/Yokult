@@ -45,7 +45,9 @@ window.onload = () => {
         axios.put(APIURL + "/modify", member).then((response) => {
             let msg = response.data["msg"];
             if (msg === "success") {
-                alert("更新成功");
+                document.getElementById(
+                    "login-message"
+                ).innerText = `修改成功。`;
             }
         });
     });
@@ -115,6 +117,7 @@ function addList(member) {
         </div>
     </div>
 </div>
-<button type="button" class="btn btn-primary" id="btn_modify_member">修改</button>`;
+<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+data-bs-target="#searchModal" id="btn_modify_member">修改</button>`;
     $("#memberInfo").append(list);
 }

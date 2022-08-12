@@ -21,8 +21,18 @@ function login() {
                 let jwt = parseJwt(sessionStorage.getItem("token"));
                 console.log(jwt);
                 sessionStorage.setItem("memID", jwt["sub"]);
+                document.getElementById(
+                    "login-message"
+                ).innerText = `登入成功，${memID}您好。
+                `;
+                setTimeout(() => {
+                    window.location.replace("/index.html");
+                }, 3000);
             } else {
-                alert("登入失敗");
+                document.getElementById(
+                    "login-message"
+                ).innerText = `登入失敗，請重新登入。
+                `;
             }
         })
         .catch((error) => console.log(error));
