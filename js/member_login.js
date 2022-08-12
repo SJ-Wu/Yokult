@@ -1,6 +1,6 @@
 window.onload = (e) => {
     if (sessionStorage.getItem("token")) {
-        window.location.replace("/index.html");
+        window.location.replace("index.html");
     }
 };
 function login() {
@@ -26,7 +26,7 @@ function login() {
                 ).innerText = `登入成功，${memID}您好。
                 `;
                 setTimeout(() => {
-                    window.location.replace("/index.html");
+                    window.location.replace("index.html");
                 }, 3000);
             } else {
                 document.getElementById(

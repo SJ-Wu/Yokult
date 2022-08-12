@@ -175,7 +175,7 @@
         console.log("getSession");
         $("#memberSign").append(`
         <a
-        href="/memberCenter.html"
+        href="memberCenter.html"
         class="nav-item nav-link"
     >
         <i class="fa-solid fa-circle-user"></i>會員中心
@@ -197,7 +197,7 @@
             sessionStorage.removeItem("token");
             sessionStorage.removeItem("memID");
             setTimeout(() => {
-                window.location.replace("/index.html");
+                window.location.replace("index.html");
             }, 3000);
         } else {
             document.getElementById(
