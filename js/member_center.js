@@ -1,10 +1,13 @@
 window.onload = () => {
     const APIURL = URL + MEMBER;
+    const memID = sessionStorage.getItem("memID");
     const token = sessionStorage.getItem("token");
     console.log(token);
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    axios.defaults.headers.post["Content-Type"] =
+        "application/json;charse=UTF-8";
     axios
-        .get(APIURL + "/TGA004")
+        .get(APIURL + `/${memID}`)
         .then((response) => {
             console.log(response.data);
             member = response.data;
@@ -30,6 +33,7 @@ window.onload = () => {
             }
             console.log(error.config);
         });
+
     $("#memberInfo").on("click", "#btn_modify_member", (e) => {
         let member = {};
         member["memID"] = document.getElementById("mem_id").value;
@@ -38,16 +42,12 @@ window.onload = () => {
         member["memCellPhone"] = document.getElementById("mem_cellphone").value;
         member["memBirth"] = document.getElementById("mem_birth").value;
         member["memAddress"] = document.getElementById("mem_address").value;
-        axios.defaults.headers.post["Content-Type"] =
-            "application/json;charse=UTF-8";
-        axios
-            .put("http://localhost:8080/yokult/api/0.02/member/modify", member)
-            .then((response) => {
-                let msg = response.data["msg"];
-                if (msg === "success") {
-                    alert("更新成功");
-                }
-            });
+        axios.put(APIURL + "/modify", member).then((response) => {
+            let msg = response.data["msg"];
+            if (msg === "success") {
+                alert("更新成功");
+            }
+        });
     });
 };
 function addList(member) {
