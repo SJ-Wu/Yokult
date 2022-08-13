@@ -82,163 +82,147 @@
                         <h3 class="card-title">牙樂多牙醫診所</h3>
                     </div>
                     <div class="card-body">
-                        <form id="signup_form" onsubmit="signUp();return false">
-                            <div class="input-group mb-3">
-                                <input
-                                    type="text"
-                                    id="memID"
-                                    class="form-control"
-                                    placeholder="請輸入帳號(大小寫英文數字長度必需在6到20之間)"
-                                    pattern="[(a-zA-Z0-9_)]{6,20}"
-                                    required
-                                />
-                                <div class="input-group-append">
-                                    <div
-                                        class="input-group-text"
-                                        style="height: 100%"
-                                    >
-                                        <span class="fas fa-user"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input
-                                    type="password"
-                                    id="memPassword"
-                                    class="form-control"
-                                    placeholder="請輸入密碼"
-                                    required
-                                />
-                                <div class="input-group-append">
-                                    <div
-                                        class="input-group-text"
-                                        style="height: 100%"
-                                    >
-                                        <span class="fas fa-lock"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input
-                                    type="password"
-                                    id="memPasswordConfirm"
-                                    class="form-control"
-                                    placeholder="請再次輸入密碼"
-                                    required
-                                />
-                                <div class="input-group-append">
-                                    <div
-                                        class="input-group-text"
-                                        style="height: 100%"
-                                    >
-                                        <span class="fas fa-lock"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input
-                                    type="text"
-                                    id="memName"
-                                    class="form-control"
-                                    placeholder="姓名"
-                                    required
-                                />
-                                <div class="input-group-append">
-                                    <div
-                                        class="input-group-text"
-                                        style="height: 100%"
-                                    >
-                                        <span class="fas fa-user"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input
-                                    placeholder="出生日期"
-                                    class="form-control"
-                                    type="text"
-                                    onfocus="(this.type='date')"
-                                    id="memBirth"
-                                    required
-                                />
-                                <div class="input-group-append">
-                                    <div
-                                        class="input-group-text"
-                                        style="height: 100%"
-                                    >
-                                        <span
-                                            ><i class="fa fa-calendar"></i
-                                        ></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input
-                                    type="email"
-                                    id="memEmail"
-                                    class="form-control"
-                                    pattern="[\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}"
-                                    placeholder="信箱"
-                                    required
-                                />
-                                <div class="input-group-append">
-                                    <div
-                                        class="input-group-text"
-                                        style="height: 100%"
-                                    >
-                                        <span
-                                            class="fa fa-envelope-open"
-                                        ></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input
-                                    type="tel"
-                                    id="memCellPhone"
-                                    class="form-control"
-                                    pattern="[0-9]{10}"
-                                    placeholder="手機號碼"
-                                    required
-                                />
-                                <div class="input-group-append">
-                                    <div
-                                        class="input-group-text"
-                                        style="height: 100%"
-                                    >
-                                        <span class="fa fa-phone-alt"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input
-                                    type="text"
-                                    id="memAddress"
-                                    class="form-control"
-                                    placeholder="居住地址"
-                                />
-                                <div class="input-group-append">
-                                    <div
-                                        class="input-group-text"
-                                        style="height: 100%"
-                                    >
-                                        <span class="bi-geo-alt"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <button
-                                    type="submit"
-                                    id="btn_signup"
-                                    class="btn btn-primary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#searchModal"
+                        <div class="input-group mb-3">
+                            <input
+                                type="text"
+                                id="memID"
+                                class="form-control"
+                                placeholder="請輸入帳號(大小寫英文數字長度必需在6到20之間)"
+                                pattern="[(a-zA-Z0-9_)]{6,20}"
+                            />
+                            <div class="input-group-append">
+                                <div
+                                    class="input-group-text"
+                                    style="height: 100%"
                                 >
-                                    註冊
-                                </button>
+                                    <span class="fas fa-user"></span>
+                                </div>
                             </div>
-                        </form>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input
+                                type="password"
+                                id="memPassword"
+                                class="form-control"
+                                placeholder="請輸入密碼"
+                            />
+                            <div class="input-group-append">
+                                <div
+                                    class="input-group-text"
+                                    style="height: 100%"
+                                >
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input
+                                type="password"
+                                id="memPasswordConfirm"
+                                class="form-control"
+                                placeholder="請再次輸入密碼"
+                            />
+                            <div class="input-group-append">
+                                <div
+                                    class="input-group-text"
+                                    style="height: 100%"
+                                >
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input
+                                type="text"
+                                id="memName"
+                                class="form-control"
+                                placeholder="姓名"
+                            />
+                            <div class="input-group-append">
+                                <div
+                                    class="input-group-text"
+                                    style="height: 100%"
+                                >
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input
+                                placeholder="出生日期"
+                                class="form-control"
+                                type="text"
+                                onfocus="(this.type='date')"
+                                id="memBirth"
+                            />
+                            <div class="input-group-append">
+                                <div
+                                    class="input-group-text"
+                                    style="height: 100%"
+                                >
+                                    <span><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input
+                                type="email"
+                                id="memEmail"
+                                class="form-control"
+                                placeholder="信箱"
+                            />
+                            <div class="input-group-append">
+                                <div
+                                    class="input-group-text"
+                                    style="height: 100%"
+                                >
+                                    <span class="fa fa-envelope-open"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input
+                                type="tel"
+                                id="memCellPhone"
+                                class="form-control"
+                                placeholder="手機號碼"
+                            />
+                            <div class="input-group-append">
+                                <div
+                                    class="input-group-text"
+                                    style="height: 100%"
+                                >
+                                    <span class="fa fa-phone-alt"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input
+                                type="text"
+                                id="memAddress"
+                                class="form-control"
+                                placeholder="居住地址"
+                            />
+                            <div class="input-group-append">
+                                <div
+                                    class="input-group-text"
+                                    style="height: 100%"
+                                >
+                                    <span class="bi-geo-alt"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <button
+                                id="btn_signup"
+                                class="btn btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#searchModal"
+                            >
+                                註冊
+                            </button>
+                        </div>
                     </div>
                     <!-- /.card-body -->
                 </div>
