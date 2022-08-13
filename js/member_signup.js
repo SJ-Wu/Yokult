@@ -42,7 +42,7 @@ function registerMsg(msg) {
     }
 }
 
-function signUp() {}
+//JS regex reference: https://ithelp.ithome.com.tw/articles/10094951
 function accountValidation(member, memPasswordConfirm) {
     if (/[(a-zA-Z0-9)]{6,20}/.test(member.memID) === false) {
         return "無效的帳號";
