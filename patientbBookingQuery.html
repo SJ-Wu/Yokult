@@ -122,13 +122,20 @@
               href="#"
               class="nav-link dropdown-toggle"
               data-bs-toggle="dropdown"
-              >Pages</a
+              >掛號系統</a
             >
             <div class="dropdown-menu m-0">
-              <a href="price.html" class="dropdown-item">Pricing Plan</a>
-              <a href="team.html" class="dropdown-item">Our Dentist</a>
-              <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-              <a href="appointment.html" class="dropdown-item">Appointment</a>
+              <a href="patientBooking.html" class="dropdown-item"
+                >預約門診時間</a
+              >
+              <a href="patientbBookingQuery.html" class="dropdown-item"
+                >預約查詢</a
+              >
+              <a href="patientCheckIn.html" class="dropdown-item">看診報到</a>
+              <a href="patientNowNum.html" class="dropdown-item">看診進度</a>
+              <a href="patientChartQuery.html" class="dropdown-item"
+                >就診紀錄查詢</a
+              >
             </div>
           </div>
           <a href="contact.html" class="nav-item nav-link">Contact</a>
@@ -200,14 +207,28 @@
             <input
               type="text"
               name="IDcard"
-              class="form-control bg-light border-0"
+              class="cinput form-control bg-light border-0"
               placeholder="請輸入驗證碼"
               style="height: 55px"
             />
           </div>
-          <img src="img/captcha.png" style="width: 150px" alt="" />
-          <!-- <div style="display: inline-block;"> -->
-          <!-- </div> -->
+          <div class="col-12 col-sm-6" style="text-align: left">
+            <span lass="captcha">
+              <img
+                class="captcha"
+                src="http://localhost:8080/Proj_Yokult/captcha"
+                style="width: 150px"
+                alt=""
+              />
+            </span>
+            <button
+              class="refresh btn btn-dark w-40 py-3"
+              type="button"
+              style="margin-left: 20px"
+            >
+              更換圖片
+            </button>
+          </div>
           <div class="col-12">
             <button class="bookingQuery btn btn-dark w-100 py-3" type="button">
               按我查詢
