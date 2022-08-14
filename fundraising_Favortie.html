@@ -37,7 +37,7 @@
 <body>
     <!--注意順序-->
     <!--用javascript引入header-->
-    <div class="header">header</div>
+    <div id="header">header</div>
 
     <!-- Full Screen Search Start -->
     <div class="modal fade" id="searchModal" tabindex="-1">
@@ -244,7 +244,7 @@
 
     <!--注意順序-->
     <!--用javascript引入footer-->
-    <div class="fotter">fotter</div>
+    <div id="footer">footer</div>
 
 
     <!-- Back to Top -->
@@ -268,8 +268,9 @@
     <script type="text/javascript">
         //在js中引入
         // $(document).ready(function () {
-            $('div.header').load('./referenceHTML/header.html');
-            $('div.fotter').load('./referenceHTML/fotter.html');
+        // $(document).ready(function () {
+            $('#header').load('header.html');
+            $('#footer').load('footer.html');
         // });
     </script>
 
