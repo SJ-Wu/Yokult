@@ -20,8 +20,8 @@ $(function () {
       success: function (data) {
         console.log(data);
         if (data.msg == "return date success") {
+          $("select.chart").html("");
           $.each(data.list, function (i, item) {
-            $("select.chart").html("");
             $("select.chart").append(`<option>${item}</option>`);
           });
         } else if (data.msg == "you don't see doctor yet") {
