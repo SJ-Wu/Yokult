@@ -13,28 +13,52 @@ $(function () {
         return false;
     }
   });
+
+  //captcha
+  $("button.refresh").on("click", function () {
+    $("img.captcha").attr(
+      "src",
+      `http://localhost:8080/Proj_Yokult/captcha?${new Date().getTime()}`
+    );
+    // $("span.captcha").html(`<img
+    //             class="captcha"
+    //             src="http://localhost:8080/Proj_Yokult/captcha?${new Date().getTime()}"
+    //             style="width: 150px"
+    //             alt=""
+    //           />`);
+  });
+
   //查詢預約
   // console.log($("button.bookingQuery"));
   $("button.bookingQuery").on("click", function () {
     //先清空
     $("div.card-body div.cancelDiv").remove();
+
     $.ajax({
       url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/bookingQuery", // 資料請求的網址
       type: "GET", // GET | POST | PUT | DELETE | PATCH
       data: {
         memID: memIdLogin,
+        cinput: $("input.cinput").val(),
       }, // 將物件資料(不用雙引號) 傳送到指定的 url
       dataType: "json", // 預期會接收到回傳資料的格式： json | xml | html
       success: function (data) {
-        console.log(data);
-        if (data.msg == "you have no unchecked booking data") {
-          $("div.overlay article")
-            .find("article")
-            .html(
-              `<h1>您尚未預約掛號</h1>
+        console.log(data.msg);
+        if (data.msg == "incorrect captcha") {
+          $("div.overlay").fadeIn();
+          $("div.overlay article").html(
+            `<h1>驗證碼輸入錯誤</h1>
               <button type="button" class="btn_modal_close cancelfalse">確定</button> 
                 `
-            );
+          );
+        }
+        if (data.msg == "you have no unchecked booking data") {
+          $("div.overlay").fadeIn();
+          $("div.overlay article").html(
+            `<h1>您尚未預約掛號</h1>
+              <button type="button" class="btn_modal_close cancelfalse">確定</button> 
+                `
+          );
         }
         if (data.msg == "bookingQuery sucess") {
           $.each(data.list, function (i, item) {
