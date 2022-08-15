@@ -6,6 +6,7 @@ $(function () {
     $.ajax({
       url: "http://localhost:8080/yokult/api/0.01/booking/nowNum", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         doctorId: doctorId1,
       }), // 將物件資料(不用雙引號) 傳送到指定的 url
@@ -22,6 +23,7 @@ $(function () {
     $.ajax({
       url: "http://localhost:8080/yokult/api/0.01/booking/nowNum", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         doctorId: doctorId2,
       }), // 將物件資料(不用雙引號) 傳送到指定的 url
@@ -41,6 +43,7 @@ $(function () {
     $.ajax({
       url: "http://localhost:8080/yokult/api/0.01/doctor/loadDr", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         doctorId: doctorId1,
       }), // 將物件資料(不用雙引號) 傳送到指定的 url
@@ -55,6 +58,7 @@ $(function () {
     $.ajax({
       url: "http://localhost:8080/yokult/api/0.01/doctor/loadDr", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         doctorId: doctorId2,
       }), // 將物件資料(不用雙引號) 傳送到指定的 url
