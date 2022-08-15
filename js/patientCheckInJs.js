@@ -21,6 +21,7 @@ $(function () {
       $.ajax({
         url: "http://localhost:8080/yokult/api/0.01/booking/patientCheckin", // 資料請求的網址
         type: "POST", // GET | POST | PUT | DELETE | PATCH
+        contentType: "application/json",
         data: JSON.stringify({
           patientIdcard: inputID,
           memID: memIdLogin,

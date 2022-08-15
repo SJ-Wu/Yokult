@@ -110,6 +110,7 @@ $(function () {
     $.ajax({
       url: "http://localhost:8080/yokult/api/0.01/booking/cancelBooking", // 資料請求的網址
       type: "DELETE", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         patientIdcard: package.patientIdcard,
         bookingDate: package.bookingDate,
