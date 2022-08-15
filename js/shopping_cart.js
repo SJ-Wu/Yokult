@@ -126,13 +126,13 @@ function addList(order) {
     </div>
     </td>
     <td class="shoping_cart_price">NT$<span class="product_price">${
-        order["proPrice"] ?? ""
+        order["proPrice"]
     }</span></td>
     <td class="shoping__cart__quantity">
         <div class="quantity">
             <div class="pro-qty">
                 <i class="fa-solid fa-minus dec qtybtn"></i>
-                <input type="text" value="${order["quantity"] ?? ""}"/>
+                <input type="text" value="${order["quantity"]}"/>
                 <i class="fa-solid fa-plus inc qtybtn"></i>
             </div>
         </div>

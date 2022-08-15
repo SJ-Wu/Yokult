@@ -19,7 +19,7 @@ $(function () {
       $("div.overlay article").find("p").html(`<h3>未輸入身分證字號</h3>`);
     } else {
       $.ajax({
-        url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/patientCheckin", // 資料請求的網址
+        url: "http://localhost:8080/yokult/api/0.01/booking/patientCheckin", // 資料請求的網址
         type: "POST", // GET | POST | PUT | DELETE | PATCH
         data: JSON.stringify({
           patientIdcard: inputID,
