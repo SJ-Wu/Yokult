@@ -198,10 +198,63 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+    <script>
+
+        //建立一個傳送點擊記錄的函數
+
+        function clicksGo(){                                                   
+
+            //使用JQuery當中的ajax函數來傳送
+
+            $.ajax({
+
+                //傳送給 clicks.php 作資料處理
+
+                url:"clicks.php",                                                              
+
+                //傳送資料的參數和值
+
+                data:"&clicks=1",  
+
+                //傳送方式
+
+                type : "POST",                                                                    
+
+                //接收資料的格式
+
+                //當訊息傳送給PHP處理之後，處理完成必須回傳一個成功訊息，接收到成功訊息才代表完成記錄
+
+                dataType:'json', 
+
+                //如果傳送(或接收)失敗的處理動作
+
+                error:function(){                                                                 
+
+                    alert("失敗");
+
+                },
+
+                //如果成功收到回傳訊息後的處理動作
+
+                success:function(){                                                           
+
+                    alert("成功");
+
+                }
+
+            }); 
+        };
+    </script>
+
+
+
     <script> 
    
-            fetch('http://localhost:8080/Proj_Yokult/api/0.01/topic').then((res) => res.json()).then((data) => {
-                let topics = data.topics;
+            fetch('http://localhost:8080/yokult/api/0.01/topic').then((res) => res.json()).then((data) => {
+                let topics = data;
                 sessionStorage.setItem("topics", JSON.stringify(topics));
                 topics.forEach(e => {
                 document.querySelector('#list').innerHTML +=  `
@@ -216,7 +269,7 @@
                     </h4>
                   </div>
                 <div class="col-lg-7" style="min-height: 500px;">
-                    <a href="healthtopicstyle.html?id=${e.topid}" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn" data-wow-delay="0.6s">繼續閱讀</a>
+                    <a href="healthtopicstyle.html?id=${e.topid}"  onClick="clicksGo()" target="_blank" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn" data-wow-delay="0.6s">繼續閱讀</a>
                     `;
                 });
             })
