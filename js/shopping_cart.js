@@ -1,5 +1,28 @@
+let cart = [
+    {
+        proID: "1",
+        proName: "MARVIS義大利經典牙膏",
+        quantity: 1,
+        proPrice: 339,
+    },
+    {
+        proID: "2",
+        proName: "舒酸定強化琺瑯質兒童牙膏",
+        quantity: 2,
+        proPrice: 180,
+    },
+    {
+        proID: "3",
+        proName: "舒酸定專業修復牙膏",
+        quantity: 5,
+        proPrice: 180,
+    },
+];
+sessionStorage.setItem("cart", JSON.stringify(cart));
+
 $(window).on("load", () => {
     let orderlist = JSON.parse(sessionStorage.getItem("cart"));
+    console.log(orderlist);
     orderlist.forEach((order) => {
         addList(order);
     });
@@ -141,7 +164,7 @@ function addList(order) {
         order["proPrice"] * order["quantity"]
     }</span></td>
     <td class="shoping__cart__item_close">
-        <span class="fa-solid fa-xmark btn_delete"></span>
+        <span style="color:red;" class="fa-solid fa-xmark btn_delete"></span>
     </td>
     </tr>`;
     $("#shoppingcart_orderlist").append(list);
