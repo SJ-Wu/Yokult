@@ -60,16 +60,17 @@ $(function () {
   function getID(memIdLogin) {
     if (memIdLogin != null) {
       $.ajax({
-        url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/bookingQuery",
+        url: "http://localhost:8080/yokult/api/0.01/booking/bookingQuery/hasCameHere",
         type: "GET",
         data: {
           memID: memIdLogin,
         },
         dataType: "json",
         success: function (data) {
-          // console.log(data);
+          console.log("getID");
+          console.log(data);
           //=====判斷為初診
-          if (data.msg == "you have no unchecked booking data") {
+          if (data.msg == "you have no booking data") {
             // alert("無就診紀錄，請選擇初診，並填寫身分證字號，感謝您");
             $("input#single").prop("checked", true);
             $("input#double").prop("checked", false);
@@ -79,9 +80,9 @@ $(function () {
             $("input#IDcard").attr("readonly", false);
           }
           //=====判斷為複診
-          if (data.msg == "bookingQuery sucess") {
+          if (data.msg == "booking data sucess") {
             // console.log(data.list[0].patientIdcard);
-            let id = data.list[0].patientIdcard;
+            let id = data.patientIdcard;
             package.patientIdcard = id;
             $("input#single").prop("checked", false);
             $("input#single").prop("disabled", true);
@@ -113,7 +114,22 @@ $(function () {
     let date = getYear + "/" + getDate.replace(/ /g, "");
     date = date.replace(/\//g, "-");
     let ampm = $(this).text().substring(0, 1);
-
+    //加工日期
+    let arr = date.split("-");
+    let monthadd;
+    let dateadd;
+    if (arr[1].length == 1) {
+      monthadd = "0" + arr[1];
+    } else {
+      monthadd = arr[1];
+    }
+    if (arr[2].length == 1) {
+      dateadd = "0" + arr[2];
+    } else {
+      dateadd = arr[2];
+    }
+    date = arr[0] + "-" + monthadd + "-" + dateadd;
+    console.log(date);
     // console.log(ampm);
     package.bookingDate = date;
     package.amPm = ampm;
@@ -376,7 +392,7 @@ $(function () {
 
   function ajaxForScheduleDrname(date1, date2) {
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/drSchedule", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/booking/drSchedule", // 資料請求的網址
       type: "GET", // GET | POST | PUT | DELETE | PATCH
       data: {
         date1: date1,
@@ -387,10 +403,13 @@ $(function () {
       success: function (data) {
         // console.log(data);
         $("span.drName").text(data.schedule.name + "醫師");
-        $("img.drImg").attr(
-          "src",
-          `data:image/png;base64,${data.schedule.photo}`
-        );
+        // console.log(data.schedule.photo.length > 0);
+        if (data.schedule.photo.length > 0) {
+          $("img.drImg").attr(
+            "src",
+            `data:image/png;base64,${data.schedule.photo}`
+          );
+        }
 
         //判斷最後兩個數字
         //歸零
@@ -411,11 +430,8 @@ $(function () {
               if (str.length == 1) {
                 str = "0" + str;
               }
-              console.log("str=", str);
-              console.log(
-                "doctorScheduleDate substring",
-                listitem.doctorScheduleDate.substring(8)
-              );
+              // console.log("str=", str);
+              // console.log("doctorScheduleDate substring",  listitem.doctorScheduleDate.substring(8) );
 
               if (listitem.doctorScheduleDate.substring(8) == str) {
                 let ampm = listitem.doctorAmpm;
@@ -454,8 +470,9 @@ $(function () {
   function ajaxForBooking() {
     // $("div.overlay").fadeIn();
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/receiveBookingRequest", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/booking/receiveBookingRequest", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         memID: memIdLogin,
         patientIdcard: $("input#IDcard").val(),

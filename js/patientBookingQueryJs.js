@@ -14,32 +14,42 @@ $(function () {
     }
   });
 
+  function init() {
+    $.ajax({
+      url: "http://localhost:8080/yokult/api/0.01/booking/bookingcaptcha",
+      type: "GET",
+      dataType: "json",
+      success: function (data) {
+        console.log(data);
+        $("img.captcha").attr("src", `data:image/jpeg;base64,${data.pic}`);
+        // sessionStorage.removeItem("cpassword");
+        sessionStorage.setItem("cpassword", data.cpasswordjwtToken);
+      },
+    });
+  }
+  init();
+
   //captcha
   $("button.refresh").on("click", function () {
-    $("img.captcha").attr(
-      "src",
-      `http://localhost:8080/Proj_Yokult/captcha?${new Date().getTime()}`
-    );
-    // $("span.captcha").html(`<img
-    //             class="captcha"
-    //             src="http://localhost:8080/Proj_Yokult/captcha?${new Date().getTime()}"
-    //             style="width: 150px"
-    //             alt=""
-    //           />`);
+    init();
+    // $("img.captcha").attr(
+    //   "src",
+    //   `http://localhost:8080/yokult/captcha?${new Date().getTime()}`
+    // );
   });
 
   //查詢預約
-  // console.log($("button.bookingQuery"));
   $("button.bookingQuery").on("click", function () {
     //先清空
     $("div.card-body div.cancelDiv").remove();
 
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/bookingQuery", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/booking/bookingQuery", // 資料請求的網址
       type: "GET", // GET | POST | PUT | DELETE | PATCH
       data: {
         memID: memIdLogin,
         cinput: $("input.cinput").val(),
+        ctoken: sessionStorage.getItem("cpassword"),
       }, // 將物件資料(不用雙引號) 傳送到指定的 url
       dataType: "json", // 預期會接收到回傳資料的格式： json | xml | html
       success: function (data) {
@@ -108,8 +118,9 @@ $(function () {
     // console.log(package.bookingDate);
 
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/cancelBooking", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/booking/cancelBooking", // 資料請求的網址
       type: "DELETE", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         patientIdcard: package.patientIdcard,
         bookingDate: package.bookingDate,

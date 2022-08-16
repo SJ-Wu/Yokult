@@ -11,7 +11,7 @@ $(function () {
 
   function init() {
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/chartQuery", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/booking/chartQuery", // 資料請求的網址
       type: "GET", // GET | POST | PUT | DELETE | PATCH
       data: {
         memID: memIdLogin,
@@ -38,8 +38,9 @@ $(function () {
       return;
     }
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/chartQuery", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/booking/chartQuery", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
+      contentType: "application/json",
       data: JSON.stringify({
         memID: memIdLogin,
         bookingDate: $("select.chart :selected").text(),
@@ -49,13 +50,19 @@ $(function () {
         console.log(data);
         if (data.msg == "return chart success") {
           $("input.drName").val(`看診醫師：${data.map.doctorName} 醫師`);
-          $("textarea.textareaChart").html("");
-          $("textarea.textareaChart").val(
-            data.map.chart.replace(/\n/g, "\r\n")
-          );
+          $("textarea.textareaChart").val("");
+          let bool = data.map.hasOwnProperty("chart");
+          if (bool) {
+            $("textarea.textareaChart").val(
+              data.map.chart.replace(/\n/g, "\r\n")
+            );
+          }
+          if (!bool) {
+            $("textarea.textareaChart").val("醫師尚未填寫，查無病歷紀錄");
+          }
         } else if (data.msg == "you don't see doctor yet") {
           $("input.drName").val("");
-          $("textarea.textareaChart").html("");
+          $("textarea.textareaChart").val("");
           $("textarea.textareaChart").val("醫師尚未填寫，查無病歷紀錄");
         }
       },
