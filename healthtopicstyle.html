@@ -89,8 +89,8 @@
                     <div id="topic3">
                         
                     </div>
-                    <h5 class="text-body fst-italic mb-4" id="topic5">
-                        閱覽人數:
+                    <h5 class="text-body fst-italic mb-4" >
+                        閱覽人數:<span id="topic5"></span>
                     </h5>
                 </div>
             </div>
@@ -130,66 +130,18 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
     
-    <script>
-
-        //建立一個傳送點擊記錄的函數
-
-        function clicksGo(){                                                   
-
-            //使用JQuery當中的ajax函數來傳送
-
-            $.ajax({
-
-                //傳送給 clicks.php 作資料處理
-
-                url:"clicks.php",                                                              
-
-                //傳送資料的參數和值
-
-                data:"&clicks=1",  
-
-                //傳送方式
-
-                type : "POST",                                                                    
-
-                //接收資料的格式
-
-                //當訊息傳送給PHP處理之後，處理完成必須回傳一個成功訊息，接收到成功訊息才代表完成記錄
-
-                dataType:'json', 
-
-                //如果傳送(或接收)失敗的處理動作
-
-                error:function(){                                                                 
-
-                    alert("失敗");
-
-                },
-
-                //如果成功收到回傳訊息後的處理動作
-
-                success:function(){                                                           
-
-                    alert("成功");
-
-                }
-
-            }); 
-        };
-    </script>
+    
     
     
     <script>
        
         window.onload=function(){
             fetch('http://localhost:8080/yokult/api/0.01/topic').then((res) => res.json()).then((data) => {
-               
 
                 let topics = data;
                 sessionStorage.setItem("topics", JSON.stringify(topics));
                 let searchURL = window.location.search.slice(1).split('=')[1] - 2;
 
-                
                 document.querySelector('#topic1').innerText += 
                 `${topics[searchURL].title}`
                 document.querySelector('#topic2').innerText += 
@@ -201,10 +153,28 @@
                 document.querySelector('#topic5').innerText += 
                 `${topics[searchURL].views}`
 
-            })
+                fetch('http://localhost:8080/yokult/api/0.01/topic/updateview', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    topid:`${topics[searchURL].topid}`,
+                    views:`${++topics[searchURL].views}`
+                })}).then((response) => {
+                            console.log(response) ; 
+                        }).catch((err) => {
+                            console.log('錯誤:', err);
+                        })
+
+                    })
         }
+              
     </script>
+
     
+    
+
     <script type="text/javascript">
         //在js中引入
         // $(document).ready(function () {
