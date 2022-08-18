@@ -37,7 +37,7 @@
 <body>
     <!--注意順序-->
     <!--用javascript引入header-->
-    <div class="header">header</div>
+    <div id="header">header</div>
 
     <!-- Full Screen Search Start -->
     <div class="modal fade" id="searchModal" tabindex="-1">
@@ -62,7 +62,7 @@
     <div class="container-fluid bg-primary py-4 hero-header mb-5">
         <div class="row py-3">
             <div class="col-12 text-center">
-                <h1 class="display-7 text-white animated zoomIn" style="margin-top: 10px;">募資提案</h1>
+                <h1 class="display-7 text-white animated zoomIn" style="margin-top: 10px;">我的最愛</h1>
             </div>
         </div>
     </div>
@@ -127,7 +127,7 @@
                         <div class="team-text position-relative bg-light text-left rounded-bottom p-4">
                             <p style="margin: 0;">已達標</p>
                             <p class="text-primary mb-0" style="font-size: small;">社團法人中華民國牙醫師公會全國聯合會</p>
-                            <a href="propsal-page1.html">
+                            <a href="./fundraising/propsal-page1.html">
                                 <h4 class="mb-2 h5">偏鄉牙醫志工團｜為偏鄉學童巡迴牙齒健檢</h4>
                             </a>
                             <div style="margin-top: 15px; height: 4px; background-color: gray;">
@@ -244,7 +244,7 @@
 
     <!--注意順序-->
     <!--用javascript引入footer-->
-    <div class="fotter">fotter</div>
+    <div id="footer">footer</div>
 
 
     <!-- Back to Top -->
@@ -268,8 +268,9 @@
     <script type="text/javascript">
         //在js中引入
         // $(document).ready(function () {
-            $('div.header').load('./referenceHTML/header.html');
-            $('div.fotter').load('./referenceHTML/fotter.html');
+        // $(document).ready(function () {
+            $('#header').load('header.html');
+            $('#footer').load('footer.html');
         // });
     </script>
 
