@@ -140,8 +140,8 @@
 
                 let topics = data;
                 sessionStorage.setItem("topics", JSON.stringify(topics));
-                let searchURL = window.location.search.slice(1).split('=')[1] - 2;
-
+                let searchURL = window.location.search.slice(1).split('=')[1] - 1;
+                console.log("searchURL",searchURL);
                 document.querySelector('#topic1').innerText += 
                 `${topics[searchURL].title}`
                 document.querySelector('#topic2').innerText += 
