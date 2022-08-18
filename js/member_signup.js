@@ -6,7 +6,7 @@ window.onload = (e) => {
         }
     };
     document.getElementById("btn_signup").addEventListener("click", () => {
-        const API = URL + MEMBER;
+        const API = YOKULT_URL + MEMBER;
         member["memID"] = document.getElementById("memID").value;
         member["memPassword"] = document.getElementById("memPassword").value;
         member["memEmail"] = document.getElementById("memEmail").value;

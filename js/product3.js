@@ -1,22 +1,22 @@
 var products = null;
 
 window.onload = function () {
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
+    var requestOptions = {
+        method: "GET",
+        redirect: "follow",
+    };
 
-  fetch(URL + PRODUCT + "/?category=保健相關", requestOptions)
-    .then((response) => response.text())
-    .then((text) => {
-      const rep = JSON.parse(text);
+    fetch(YOKULT_URL + PRODUCT + "/?category=保健相關", requestOptions)
+        .then((response) => response.text())
+        .then((text) => {
+            const rep = JSON.parse(text);
 
-      products = rep.products;
+            products = rep.products;
 
-      products.forEach((product, idx) => {
-        let productHtml = "";
+            products.forEach((product, idx) => {
+                let productHtml = "";
 
-        productHtml = `
+                productHtml = `
      <li>
                 <a href="#">
                   <div class="img_block">
@@ -58,37 +58,38 @@ window.onload = function () {
                   </div>
                 </div>
               </li>`;
-        $("ul.item_list").prepend(productHtml);
-        //   console.log(productHtml);
-      });
-    })
-    .catch((error) => console.log("error", error));
+                $("ul.item_list").prepend(productHtml);
+                //   console.log(productHtml);
+            });
+        })
+        .catch((error) => console.log("error", error));
 };
 
 function addCart(idx) {
-  let cartValue = sessionStorage.getItem("cart");
-  let cart = cartValue != null && cartValue != "" ? JSON.parse(cartValue) : [];
+    let cartValue = sessionStorage.getItem("cart");
+    let cart =
+        cartValue != null && cartValue != "" ? JSON.parse(cartValue) : [];
 
-  let quantity = parseInt($(`select[data-prod-idx="${idx}"]`)[0].value);
+    let quantity = parseInt($(`select[data-prod-idx="${idx}"]`)[0].value);
 
-  let oldCartItemIdx = cart.findIndex(
-    (item) => item.proID == products[idx].proID
-  );
+    let oldCartItemIdx = cart.findIndex(
+        (item) => item.proID == products[idx].proID
+    );
 
-  if (oldCartItemIdx != -1) {
-    cart[oldCartItemIdx].quantity = quantity;
-  } else {
-    cart.push({
-      ...products[idx],
-      quantity: quantity,
-    });
-  }
+    if (oldCartItemIdx != -1) {
+        cart[oldCartItemIdx].quantity = quantity;
+    } else {
+        cart.push({
+            ...products[idx],
+            quantity: quantity,
+        });
+    }
 
-  sessionStorage.setItem("cart", JSON.stringify(cart));
+    sessionStorage.setItem("cart", JSON.stringify(cart));
 
-  $("#sussess-order").addClass("show");
+    $("#sussess-order").addClass("show");
 
-  setTimeout(() => {
-    $("#sussess-order").removeClass("show");
-  }, 2000);
+    setTimeout(() => {
+        $("#sussess-order").removeClass("show");
+    }, 2000);
 }

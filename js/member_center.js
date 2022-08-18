@@ -1,5 +1,5 @@
 window.onload = () => {
-    const APIURL = URL + MEMBER;
+    const APIURL = YOKULT_URL + MEMBER;
     const memID = sessionStorage.getItem("memID");
     const token = sessionStorage.getItem("token");
     console.log(token);

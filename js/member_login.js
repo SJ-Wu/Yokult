@@ -8,7 +8,7 @@ function login() {
     let memPassword = document.getElementById("memPassword").value;
     // console.log(memID);
     // console.log(memPassword);
-    const loginURL = URL + MEMBER + "/login";
+    const loginURL = YOKULT_URL + MEMBER + "/login";
     axios
         .post(loginURL, {
             memID: memID,
