@@ -215,20 +215,19 @@
     <script>
         $(document).ready(() => {
             //生成json
-			var json = [];
-            var j = {};
-			j.table = "Proposal";
-			j.action = "GetAll";
-			json.push(j);
-			var jsondata = JSON.stringify(json);
-
+			// var json = [];
+            // var j = {};
+			// j.table = "Proposal";
+			// j.action = "GetAll";
+			// json.push(j);
+			// var jsondata = JSON.stringify(json);
             $.ajax({
-                url: "../fundraising", // 資料請求的網址
+                url: "http://localhost:8080/yokult/fundraising/ProposalGetAll", // 資料請求的網址
                 type: "POST", // GET | POST | PUT | DELETE | PATCH
-                data: jsondata, // 將物件資料(不用雙引號) 傳送到指定的 url
+                //data: jsondata, // 將物件資料(不用雙引號) 傳送到指定的 url
                 dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
                 processData: false,
-                contentType: false,
+                contentType: "application/json",
                 timeout: 0, // request 可等待的毫秒數 | 0 代表不設定 timeout
                 beforeSend: function () {
                     // 在 request 發送之前執行
@@ -245,6 +244,7 @@
                 },
                 success: function (jsObject) {
                     console.log(jsObject);
+                    console.log(jsObject.Proposals);
 
                     //四捨五入公式
                     let roundDecimal = function (val, precision) {
@@ -255,11 +255,12 @@
                         var str = numb.toString().split(".");
                         str[0] = str[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                         return str.join(".");
+                        return numb;
                     }
 
                     //迴圈印出募資提案
-                    for(var i=0 ; i<jsObject.length ; i++ ){
-                        let joProposal = jsObject[i];
+                    for(var i=0 ; i<jsObject.Proposals.length ; i++ ){
+                        let joProposal = jsObject.Proposals[i];
                         let proposalID = joProposal.proposalID;
 
                         let proposalPage = `./fundraising_proposal-${proposalID}.html`;

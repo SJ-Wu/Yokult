@@ -233,21 +233,18 @@
     $(document).ready(() => {
         let pathname = new URL(document.URL).pathname.toString();  
         //生成json
-        var json = [];
-        var j = {};
-        j.table = "Proposal";
-        j.action = "GetOne";
-        j.page = pathname.split('/').pop().split('.')[0].split('-').pop();
-        json.push(j);
+        var json = {};
+        json.page = pathname.split('/').pop().split('.')[0].split('-').pop();
         var jsondata = JSON.stringify(json);
-
+        console.log(json);
+        console.log(jsondata);
         $.ajax({
-            url: "../fundraising", // 資料請求的網址
+            url: "http://localhost:8080/yokult/fundraising/ProposalGetOne", // 資料請求的網址
             type: "POST", // GET | POST | PUT | DELETE | PATCH
-            data: jsondata, // 將物件資料(不用雙引號) 傳送到指定的 url
+            data: jsondata,                 // 將物件資料(不用雙引號) 傳送到指定的 url
             dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
             processData: false,
-            contentType: false,
+            contentType: "application/json",
             timeout: 0, // request 可等待的毫秒數 | 0 代表不設定 timeout
             beforeSend: function () {
                 // 在 request 發送之前執行
@@ -266,7 +263,7 @@
                 console.log(jsObject);
 
                 //proposal部分
-                let joProposal = jsObject[0];
+                let joProposal = jsObject.Proposal;
                 console.log(joProposal);
                 //四捨五入公式
                 let roundDecimal = function (val, precision) {
@@ -405,7 +402,7 @@
                                     2016年3月，二十名來自全台各地的高中生經由網路自發募集，組成「築夢教育志工團」，並在2016年4月15日向區域和平志工團申請青年自組團隊資格。我們懷抱熱情和一顆回饋的心，決定前往嘉義偏鄉籌組教育服務營。
                                 </strong>
                             </li>
-                            <img src="./img/fundraising/proposal-1/content/price-1_XXX.jpg" class="article">
+                            <img class="article" src="data:image/png;base64, ${proposalPictureBaseZip64}">
                             <li class="article">
                                 <strong>
                                     嘉義縣為全台灣人口老化最高的城市，隔代教養現象頻繁，容易衍伸認知及價值觀上的差異，相處模式中產生無形的時代隔閡，對於孩子的行為及表現也較容易產生拒絕、失落，甚至是缺乏自信心的問題。
@@ -434,8 +431,8 @@
                             <p class="article">
                                 <strong>參加人數：目前已有45位港墘國小學生報名。</strong>
                             </p>
-                            <img src="./img/fundraising/proposal-1/content/price-2_XXX.jpg" class="article">
-                            <img src="./img/fundraising/proposal-1/content/price-3_XXX.jpg" class="article">
+                            <img class="article" src="data:image/png;base64, ${proposalPictureBaseZip64}">
+                            <img class="article" src="data:image/png;base64, ${proposalPictureBaseZip64}">
                         </ul>
                     </div>
                 `;
@@ -443,7 +440,7 @@
                 ///////////////////////////////////////////////////////////////////////////////////////////
 
                 //plan部分
-                let joPlans = jsObject[1];
+                let joPlans = jsObject.Plans;
                 console.log(joPlans);
                 for(var i=0 ; i<joPlans.length ; i++ ){
                     let plan = joPlans[i];
@@ -473,6 +470,7 @@
                     let planPurchases = plan.planPurchases;
                     
                     let status; 
+                    let buttonControl = false;
                     if(currentMillis < proposalStartedDateTimeMillis){
                         status = "尚未開始";
                     }else if(currentMillis <= proposalEndedDateTimeMillis){
@@ -480,6 +478,7 @@
                             status = "尚未開始";
                         }else if(currentMillis <= planEndedDateTimeMillis){
                             status = "贊助專案";
+                            buttonControl = true;
                         }else{
                             status = "已結束";
                         }
@@ -535,7 +534,7 @@
                     
                     
                     //post部分，穿插postOption
-                    let joPosts = jsObject[2];
+                    let joPosts = jsObject.Posts;
                     var html_postOption = "init";
                     console.log("joPosts.length : " + joPosts.length);
                     for(var j=0 ; j<joPosts.length; j++ ){
@@ -650,20 +649,21 @@
 
 
 
-                        
-                    let btnOpen=document.querySelector(`#found-${planID}`);
-                    let btnClose=document.querySelector(`#closePayment-${planID}`);
-                    let btnPay=document.querySelector(`#confirmPayment-${planID}`);
-                    let dialog=document.querySelector(`#newOrder-${planID}`);
-                    btnOpen.addEventListener("click", function(){
-                        dialog.classList.remove("hideBox");
-                    })
-                    btnClose.addEventListener("click", function(){
-                        dialog.classList.add("hideBox");
-                    })
-                    btnPay.addEventListener("click", function(){
-                        dialog.classList.add("hideBox");
-                    })
+                    if(buttonControl == true) {
+                        let btnOpen=document.querySelector(`#found-${planID}`);
+                        let btnClose=document.querySelector(`#closePayment-${planID}`);
+                        let btnPay=document.querySelector(`#confirmPayment-${planID}`);
+                        let dialog=document.querySelector(`#newOrder-${planID}`);
+                        btnOpen.addEventListener("click", function(){
+                            dialog.classList.remove("hideBox");
+                        })
+                        btnClose.addEventListener("click", function(){
+                            dialog.classList.add("hideBox");
+                        })
+                        btnPay.addEventListener("click", function(){
+                            dialog.classList.add("hideBox");
+                        })
+                    }
                     
                 }
                 console.log("Success");

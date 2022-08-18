@@ -104,7 +104,7 @@
                         <hr>
                         <a href="./fundraising_NewProposal.html" style="color: rgb(90, 90, 90);">我要提案</a>
                         <hr>
-                        <a href="./fundraising_MyProposal.html" style="color: rgb(90, 90, 90);">我的提案</a>
+                        <a href="./fundraising_MyProposal.html" style="color: rgb(90, 90, 90); font-weight: bolder;">我的提案</a>
                     </div>
                 </div>
                 <div class="col-lg-10" style="padding-left:0px; padding-right:0px; border-left: 1px solid gray;">
@@ -171,21 +171,14 @@
 
 <script>
     $(document).ready(() => {
-        //生成json
-        var json = [];
-        var j = {};
-        j.table = "Proposal";
-        j.action = "GetMine";
-        json.push(j);
-        var jsondata = JSON.stringify(json);
 
         $.ajax({
-            url: "../fundraising", // 資料請求的網址
+            url: "http://localhost:8080/yokult/fundraising/ProposalGetMine", // 資料請求的網址
             type: "POST", // GET | POST | PUT | DELETE | PATCH
-            data: jsondata, // 將物件資料(不用雙引號) 傳送到指定的 url
+            //data: jsondata, // 將物件資料(不用雙引號) 傳送到指定的 url
             dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
             processData: false,
-            contentType: false,
+            contentType: "application/json",
             timeout: 0, // request 可等待的毫秒數 | 0 代表不設定 timeout
             beforeSend: function () {;
                 // 在 request 發送之前執行
@@ -201,10 +194,12 @@
                 500: function (res) {},
             },
             success: function (data) {
-                console.log(data[0]);
-                console.log(data[1]);
-                let allProposal = data[0];
-                let allProposalPlans = data[1];
+                console.log(data.Proposals);
+                console.log(data.Plans);
+                // console.log(data[0]);
+                // console.log(data[1]);
+                let allProposal = data.Proposals;
+                let allProposalPlans = data.Plans;
                 
                 //四捨五入公式
                 let roundDecimal = function (val, precision) {
@@ -219,7 +214,7 @@
 
 
 
-                
+                //proposal部分
                 for(var i=0; i<allProposal.length; i++){
                     let joProposal = allProposal[i];
                     console.log(joProposal);
@@ -239,7 +234,12 @@
                     }
 
                     let proposalStartedDateTime = joProposal.proposalStartedDateTime;
+                    proposalStartedDateTime = joProposal.proposalStartedDateTime.substring(0, 10) + "\n"
+                                            + joProposal.proposalStartedDateTime.substring(11, 19);
                     let proposalEndedDateTime = joProposal.proposalEndedDateTime;
+                    proposalEndedDateTime = joProposal.proposalEndedDateTime.substring(0, 10) + "\n"
+                                          + joProposal.proposalEndedDateTime.substring(11, 19);
+
                     let currentMillis = joProposal.currentMillis;
                     let proposalStartedDateTimeMillis = joProposal.proposalStartedDateTimeMillis;
                     let proposalEndedDateTimeMillis = joProposal.proposalEndedDateTimeMillis;
@@ -306,9 +306,6 @@
                             <tbody id="proposalFormBody-${proposalID}">
                                 <tr>
                                     <td class="text-title" rowspan="3">
-                                        <a href="javascript:void(0);">
-                                            <i class="fa-solid fa-pen"></i>
-                                        </a>
                                         <a href="${proposalPage}">${proposalName}</a>
                                     </td>
                                     <td>${proposalStartedDateTime}</td>
@@ -344,7 +341,7 @@
                             </tbody>
                         </table>
 
-                        <div id="proposalBuootn-${proposalID}" class="${hideBox}">
+                        <div id="proposalButton-${proposalID}" class="${hideBox}">
                             <button id="confirmChange-${proposalID}" class="btn btn-primary py-2" type="button"
                                 style=" border-radius: 5px; margin-top: 30px; margin-bottom: 5px; width: 200px; left: 35%;
                                 transform: translate(-25%);">
@@ -359,7 +356,84 @@
                     `
                     $('#proposalForm').append(html_proposal);
 
+                    // proposal修改燈箱
+                    let html_lightBox_proposal = `
+                        <form id="modifyProposal-${proposalID}" class="hideBox" method="post" enctype="multipart/form-data" style="margin: 0px; padding: 0px;">
+                            <div class="row g-2" style=" border-radius: 10px; background-color: #84ddfd;
+                            margin-top: 5%; left: 50%; transform: translate(-50%); width: 550px;  height: auto; padding: 15px;
+                            position:fixed;z-index: 100;">
+                                <div style="text-align:left; display: inline-block;">付款資訊</div>
+                                <hr style="margin-top: 5px; height: 1px; color: black">
+                            
+                                <div style="flex: 0 0 auto; width: 12%;">金額：</div>
+                                <div class="col-sm-12"><h3 style="color: red;">$ ${proposalAmount}</h3></div>
+                                <p style="margin-bottom: 0px;"><b>${proposalName}</b></p>
+                                <p><b>${proposalName}</b></p>
+                                <hr style="margin-top: 5px; height: 1px; color: black">
+                            
+                                <input name="orderAmount" value="${proposalAmount}" style="display:none;">
+                                <input name="proposalID" value="${proposalID}" style="display:none;">
+                                <input name="planID" value="${proposalID}" style="display:none;">
+                            
+                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                    <span class="h6">信用卡號：</span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input maxlength="4" type="text" name="n1-${proposalID}" class="form-control bg-light border-0" placeholder="XXXX" style="height: 25px;" />
+                                </div> _ 
+                                <div class="col-sm-2">
+                                    <input maxlength="4" type="text" name="n2-${proposalID}" class="form-control bg-light border-0" placeholder="XXXX" style="height: 25px" />
+                                </div> _ 
+                                <div class="col-sm-2">
+                                    <input maxlength="4" type="text" name="n3-${proposalID}" class="form-control bg-light border-0" placeholder="XXXX" style="height: 25px" />
+                                </div> _ 
+                                <div class="col-sm-2">
+                                    <input maxlength="4" type="text" name="n4-${proposalID}" class="form-control bg-light border-0" placeholder="XXXX" style="height: 25px" />
+                                </div>
+    
+                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px; ">
+                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                    <span class="h6">驗 證 碼 ：</span>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input maxlength="3" type="text" name="a1-${proposalID}" class="form-control bg-light border-0" placeholder="驗證碼" style="height: 25px;" />
+                                </div>
+                                <div style="flex: 0 0 auto; width: 55%;"></div>
+                                
+                                <div class="row g-2">
+                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 25px; height: 25px; ">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">郵寄選項：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <select id="postID-${proposalID}" name="postID-${proposalID}" class="form-select bg-light border-0" style="height: 40px" >
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                        
+                                        
+                                <div class="col-sm-5">
+                                    <button id="newPlan" class="btn btn-primary py-2" type="button"
+                                        style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 200px; left: 35%;
+                                        transform: translate(-25%);">
+                                        新增方案
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    `;
+                    $('body').prepend(html_lightBox_proposal);
 
+                    let btnNewPlan=document.querySelector(`#newPlan-${proposalID}`);
+                            let dialog=document.querySelector(`#modifyPlan-${planID}`);
+                            btnOpen.addEventListener("click", function(){
+                                dialog.classList.remove("hideBox");
+                            });
+
+
+                    //plan部分
                     let joPlans = allProposalPlans[i];
                     console.log(joPlans);
                     let planTotalAmount = 0;
@@ -372,8 +446,15 @@
                         let planContent = plan.planContent;
                         let planPostNote = plan.planPostNote;
                         let planPostDate = plan.planPostDate;
+                        let planYear = "-";;
+                        let planMonth = "-";;
+                        let planDate = "-";;
                         if(undefined == planPostDate){
                             planPostDate = "-";
+                        }else{
+                            planYear = planPostDate.split("-")[0];
+                            planMonth = planPostDate.split("-")[1];
+                            planDate = planPostDate.split("-")[2];
                         }
 
                         let planStartedDateTimeMillis = plan.planStartedDateTimeMillis;
@@ -411,7 +492,7 @@
                                     <tr>
                                         <td class="text-project">
                                             <a href="javascript:void(0);">
-                                                <i class="fa-solid fa-pen"></i>
+                                                <i id="openPlan-${planID}" class="fa-solid fa-pen"></i>
                                             </a>
                                             <a href="${proposalPage}">${planName}</a></td>
                                         <td>${status}</td>
@@ -424,6 +505,118 @@
                         `;
 
                         $(`#planFormBody-${proposalID}`).append(html_plan);
+
+
+                        // plan修改燈箱
+                        let html_lightBox_plan = `
+                            <form id="modifyPlan-${planID}" class="hideBox" method="post" enctype="multipart/form-data" style="margin: 0px; padding: 0px;">
+                                <div id="lightbox-${planID}" class="row g-2" style=" border-radius: 10px; background-color: #84ddfd;
+                                margin-top: 5%; left: 50%; transform: translate(-50%); width: 550px;  height: auto; padding: 15px;
+                                position:fixed;z-index: 100;">
+                                    <div style="text-align:left; display: inline-block;">方案資訊</div>
+                                    <hr style="margin-top: 5px; height: 1px; color: black">
+
+                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">方案名稱：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="4" type="text" name="${planID}-${planName}" class="form-control bg-light border-0" placeholder="${planName}" style="height: 25px;" />
+                                    </div>
+        
+                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">方案金額：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="4" type="text" name="${planID}-${planAmount}" class="form-control bg-light border-0" placeholder="${plan.planAmount}" style="height: 25px;" />
+                                    </div>
+        
+                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">方案內容：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="4" type="text" name="${planID}-${planContent}" class="form-control bg-light border-0" placeholder="${planContent}" style="height: 25px;" />
+                                    </div>
+                                            
+                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">寄送資訊：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="4" type="text" name="${planID}-${planPostNote}" class="form-control bg-light border-0" placeholder="${planPostNote}" style="height: 25px;" />
+                                    </div>
+
+                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">寄送日期：</span>
+                                    </div>
+                                    <div style="flex: 0 0 auto; width: 24%;">
+                                        <input maxlength="4" type="text" name="${planID}-year" class="form-control bg-light border-0" placeholder="${planYear}" style="height: 25px;" />
+                                    </div>_
+                                    <div style="flex: 0 0 auto; width: 24%;">
+                                        <input maxlength="4" type="text" name="${planID}-month" class="form-control bg-light border-0" placeholder="${planMonth}" style="height: 25px;" />
+                                    </div>_
+                                    <div style="flex: 0 0 auto; width: 24%;">
+                                        <input maxlength="4" type="text" name="${planID}-date" class="form-control bg-light border-0" placeholder="${planDate}" style="height: 25px;" />
+                                    </div>
+                                            
+                                            
+                                    <div class="col-sm-3">
+                                        <button id="confirmPlan-${planID}" class="btn btn-primary py-2" type="button"
+                                            style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 120px; left: 30%;">
+                                            確認修改
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button id="closePlan-${planID}" class="btn py-2" type="button"
+                                            style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 120px; left:55%;
+                                            color: #000; background-color: white; border-color: #06a3da;">
+                                            取消
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button id="removePlan-${planID}" class="btn py-2" type="button"
+                                            style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 120px; left:80%;
+                                            color: #000; background-color: red; border-color: #06a3da;">
+                                            刪除方案
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        `;
+                        // console.log("======= planPurchases :" + planPurchases + ":");
+                        if(planPurchases == "0"){
+                            $('body').prepend(html_lightBox_plan);
+
+                            let btnOpen=document.querySelector(`#openPlan-${planID}`);
+                            let btnClose=document.querySelector(`#closePlan-${planID}`);
+                            let btnRemove=document.querySelector(`#removePlan-${planID}`);
+                            let btnPay=document.querySelector(`#confirmPlan-${planID}`);
+                            let dialog=document.querySelector(`#modifyPlan-${planID}`);
+                            btnOpen.addEventListener("click", function(){
+                                dialog.classList.remove("hideBox");
+                            });
+                            btnClose.addEventListener("click", function(){
+                                dialog.classList.add("hideBox");
+                            });
+                            btnRemove.addEventListener("click", function(){
+                                dialog.classList.add("hideBox");
+                            });
+                            btnPay.addEventListener("click", function(){
+                                dialog.classList.add("hideBox");
+                            });
+                        }else{
+                            let btnOpen=document.querySelector(`#openPlan-${planID}`);
+                            btnOpen.addEventListener("click", function(){
+                                alert("方案已售出無法編輯");
+                            });
+                        }
+
+
+
+
                     }
 
                     planTotalAmount = addComma(planTotalAmount);
@@ -452,6 +645,7 @@
                     // })
                 }
 
+                // 切換專案
                 $('#proposalSelect').on('change', function() {
                     for(var k=0; k<allProposal.length; k++){
                         let proposalID = allProposal[k].proposalID;
@@ -459,13 +653,13 @@
                             //關閉所有表單
                             $(`#proposalFormTable-${proposalID}`).addClass("hideBox")
                             $(`#planFormTable-${proposalID}`).addClass("hideBox");
-                            $(`#proposalBuootn-${proposalID}`).addClass("hideBox");
+                            $(`#proposalButton-${proposalID}`).addClass("hideBox");
                         }
                     }
                     let value = this.value;
                     $(`#proposalFormTable-${value}`).removeClass("hideBox");
                     $(`#planFormTable-${value}`).removeClass("hideBox");
-                    $(`#proposalBuootn-${value}`).removeClass("hideBox");
+                    $(`#proposalButton-${value}`).removeClass("hideBox");
                 });
 
             console.log("Success");  
