@@ -11,7 +11,7 @@ $(function () {
 
   function init() {
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/chartQuery", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/booking/chartQuery", // 資料請求的網址
       type: "GET", // GET | POST | PUT | DELETE | PATCH
       data: {
         memID: memIdLogin,
@@ -38,7 +38,7 @@ $(function () {
       return;
     }
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/chartQuery", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/booking/chartQuery", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
       data: JSON.stringify({
         memID: memIdLogin,

@@ -4,7 +4,7 @@ $(function () {
 
   function init() {
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/nowNum", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/booking/nowNum", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
       data: JSON.stringify({
         doctorId: doctorId1,
@@ -20,7 +20,7 @@ $(function () {
       },
     });
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/booking/nowNum", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/booking/nowNum", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
       data: JSON.stringify({
         doctorId: doctorId2,
@@ -39,7 +39,7 @@ $(function () {
 
   function getDrName() {
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/doctor/loadDr", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/doctor/loadDr", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
       data: JSON.stringify({
         doctorId: doctorId1,
@@ -53,7 +53,7 @@ $(function () {
       },
     });
     $.ajax({
-      url: "http://localhost:8080/Proj_Yokult/api/0.01/doctor/loadDr", // 資料請求的網址
+      url: "http://localhost:8080/yokult/api/0.01/doctor/loadDr", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
       data: JSON.stringify({
         doctorId: doctorId2,

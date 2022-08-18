@@ -39,16 +39,19 @@ $(window).on("load", () => {
         totalCount = $("span#total").text();
         console.log(order);
         console.log(totalCount);
+        paymethod = $('input[name="payment"]:checked').val();
+        console.log("paymethod: ", paymethod);
         axios
-            .post("http://localhost:8080/Proj_Yokult/Checkout", {
+            .post("http://localhost:8080/yokult/Checkout", {
                 order,
                 orderlist,
                 totalCount,
+                paymethod,
             })
             .then((response) => {
                 console.log(response);
                 let msg = response.data["msg"];
-                if ($("#creditcard").val() === "creditcard") {
+                if (paymethod === "creditcard") {
                     $("#ecpay").html(response.data.msg);
                 } else {
                     if (msg === "Success") {
@@ -61,9 +64,6 @@ $(window).on("load", () => {
             })
             .catch((error) => console.log(error));
     });
-
-    console.log("hereeeeeeeeee");
-    console.log($("span#total").text());
 });
 
 // 取得付款資訊（信用卡）

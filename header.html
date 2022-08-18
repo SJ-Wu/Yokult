@@ -87,44 +87,101 @@
           <a href="about.html" class="dropdown-item">結帳資訊</a>
         </div>
       </div>
-
       <div class="nav-item dropdown">
         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
           >募資平台</a
         >
         <div class="dropdown-menu m-0">
-          <a href="fundraising_AboutPlatform.html" class="dropdown-item"
+          <a href="fundraising-AboutPlatform.html" class="dropdown-item"
             >關於募資</a
           >
-          <a href="fundraising_AllProposal.html" class="dropdown-item"
+          <a href="fundraising-AllProposal.html" class="dropdown-item"
             >所有募資</a
           >
-          <a href="fundraising_ContributionRecord.html" class="dropdown-item"
+          <a href="fundraising-ContributionRecord.html" class="dropdown-item"
             >募資紀錄</a
           >
         </div>
       </div>
-      <a href="contact.html" class="nav-item nav-link">聯絡我們</a>
     </div>
-
     <!-- <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">小幫手<i class="fa-solid fa-comment-dots"></i></a> -->
     <div class="nav-item">
       <a href="shopping_cart.html" class="nav-item nav-link">
         <i class="fa-solid fa-cart-shopping"></i>購物車
       </a>
     </div>
+    <div class="nav-item" id="memberSign">
+      <!--JavaScript-->
+    </div>
 
-    <div class="nav-item">
+    <div class="nav-item" id="logout">
       <a
         href="#"
         class="nav-item nav-link"
         data-bs-toggle="modal"
         data-bs-target="#searchModal"
-      >
-        <i class="fa-solid fa-circle-user"></i>登入
-      </a>
+        >登出<i class="fa-solid fa-arrow-right-from-bracket"></i
+      ></a>
     </div>
     <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa-solid fa-circle-user"></i>登入</button> -->
   </div>
 </nav>
 <!-- Navbar End -->
+<!-- Full Screen Search Start -->
+<div class="modal fade" id="searchModal" tabindex="-1">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-header border-0">
+      <button
+        type="button"
+        class="btn bg-white btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+        id="btn-modal-close"
+      ></button>
+    </div>
+    <div class="modal-content" style="background: rgba(9, 30, 62, 0.7)">
+      <div class="modal-body d-flex align-items-center justify-content-center">
+        <div class="input-group" style="max-width: 600px">
+          <p class="form-control border-primary p-3" id="login-message">
+            <!-- JavaScript -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Full Screen Search End -->
+<script>
+  if (sessionStorage.getItem("memID")) {
+    console.log("getSession");
+    $("#memberSign").append(`
+      <a
+      href="memberCenter.html"
+      class="nav-item nav-link"
+  >
+      <i class="fa-solid fa-circle-user"></i>會員中心
+  </a>`);
+  } else {
+    console.log("NoSession");
+    $("#memberSign").append(`
+      <a
+      href="memberLogin.html"
+      class="nav-item nav-link"
+  >登入<i class="fa-solid fa-arrow-right-to-bracket"></i>
+  </a>`);
+  }
+  $("#logout").on("click", () => {
+    if (sessionStorage.getItem("token")) {
+      document.getElementById(
+        "login-message"
+      ).innerText = `登出成功，歡迎下次再來。`;
+      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("memID");
+      setTimeout(() => {
+        window.location.replace("index.html");
+      }, 3000);
+    } else {
+      document.getElementById("login-message").innerText = `請先登入，謝謝。`;
+    }
+  });
+</script>

@@ -1,5 +1,6 @@
 $(window).on("load", () => {
     let orderlist = JSON.parse(sessionStorage.getItem("cart"));
+    console.log(orderlist);
     orderlist.forEach((order) => {
         addList(order);
     });
@@ -141,7 +142,7 @@ function addList(order) {
         order["proPrice"] * order["quantity"]
     }</span></td>
     <td class="shoping__cart__item_close">
-        <span class="fa-solid fa-xmark btn_delete"></span>
+        <span style="color:red;" class="fa-solid fa-xmark btn_delete"></span>
     </td>
     </tr>`;
     $("#shoppingcart_orderlist").append(list);
