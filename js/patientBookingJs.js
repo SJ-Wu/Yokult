@@ -60,7 +60,7 @@ $(function () {
   function getID(memIdLogin) {
     if (memIdLogin != null) {
       $.ajax({
-        url: "http://localhost:8080/yokult/api/0.01/booking/bookingQuery/hasCameHere",
+        url: YOKULT_URL + BOOKING + "/bookingQuery/hasCameHere",
         type: "GET",
         data: {
           memID: memIdLogin,
@@ -392,7 +392,7 @@ $(function () {
 
   function ajaxForScheduleDrname(date1, date2) {
     $.ajax({
-      url: "http://localhost:8080/yokult/api/0.01/booking/drSchedule", // 資料請求的網址
+      url: YOKULT_URL + BOOKING + "/drSchedule", // 資料請求的網址
       type: "GET", // GET | POST | PUT | DELETE | PATCH
       data: {
         date1: date1,
@@ -470,7 +470,7 @@ $(function () {
   function ajaxForBooking() {
     // $("div.overlay").fadeIn();
     $.ajax({
-      url: "http://localhost:8080/yokult/api/0.01/booking/receiveBookingRequest", // 資料請求的網址
+      url: YOKULT_URL + BOOKING + "/receiveBookingRequest", // 資料請求的網址
       type: "POST", // GET | POST | PUT | DELETE | PATCH
       contentType: "application/json",
       data: JSON.stringify({

@@ -16,7 +16,7 @@ $(function () {
 
   function init() {
     $.ajax({
-      url: "http://localhost:8080/yokult/api/0.01/booking/bookingcaptcha",
+      url: YOKULT_URL + BOOKING + "/bookingcaptcha",
       type: "GET",
       dataType: "json",
       success: function (data) {
@@ -44,7 +44,7 @@ $(function () {
     $("div.card-body div.cancelDiv").remove();
 
     $.ajax({
-      url: "http://localhost:8080/yokult/api/0.01/booking/bookingQuery", // 資料請求的網址
+      url: YOKULT_URL + BOOKING + "/bookingQuery", // 資料請求的網址
       type: "GET", // GET | POST | PUT | DELETE | PATCH
       data: {
         memID: memIdLogin,
@@ -118,7 +118,7 @@ $(function () {
     // console.log(package.bookingDate);
 
     $.ajax({
-      url: "http://localhost:8080/yokult/api/0.01/booking/cancelBooking", // 資料請求的網址
+      url: YOKULT_URL + BOOKING + "/cancelBooking", // 資料請求的網址
       type: "DELETE", // GET | POST | PUT | DELETE | PATCH
       contentType: "application/json",
       data: JSON.stringify({
