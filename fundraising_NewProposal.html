@@ -614,7 +614,8 @@
         var getMemID = sessionStorage.getItem("memID");
         console.log(getMemID);
         if(getMemID == null){
-          window.location.href="https://sj-wu.github.io/Yokult/fundraising_AllProposal.html";
+          alert("請先登入");
+          window.location.href="memberLogin.html";
         }
       });
 
