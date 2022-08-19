@@ -1,5 +1,5 @@
 $(function () {
-  sessionStorage.setItem("account", "TGA001");
+  // sessionStorage.setItem("account", "TGA001");
   sessionStorage.setItem("memName", "吳小儒");
   let memIdLogin = sessionStorage.getItem("account");
   let memName = sessionStorage.getItem("memName");
