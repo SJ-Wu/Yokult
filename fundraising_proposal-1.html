@@ -231,17 +231,29 @@
 
 <script>
     $(document).ready(() => {
+        // var getMemID = sessionStorage.getItem("memID");
+        var getMemID = "TGA001";
+        console.log(getMemID);
+        let json;
+        var j = {};
+
+        j.memID = getMemID;
+        json = JSON.stringify(j);
+        console.log(json);
+
+
         let pathname = new URL(document.URL).pathname.toString();  
         //生成json
-        var json = {};
-        json.page = pathname.split('/').pop().split('.')[0].split('-').pop();
-        var jsondata = JSON.stringify(json);
+        // var json = {};
+        j.page = pathname.split('/').pop().split('.')[0].split('-').pop();
+        json = JSON.stringify(j);
+        console.log(j);
         console.log(json);
-        console.log(jsondata);
+
         $.ajax({
             url: "http://localhost:8080/yokult/fundraising/ProposalGetOne", // 資料請求的網址
             type: "POST", // GET | POST | PUT | DELETE | PATCH
-            data: jsondata,                 // 將物件資料(不用雙引號) 傳送到指定的 url
+            data: json,                 // 將物件資料(不用雙引號) 傳送到指定的 url
             dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
             processData: false,
             contentType: "application/json",
@@ -648,14 +660,17 @@
                     $('body').prepend(html_lightBox);
 
 
-
                     if(buttonControl == true) {
                         let btnOpen=document.querySelector(`#found-${planID}`);
                         let btnClose=document.querySelector(`#closePayment-${planID}`);
                         let btnPay=document.querySelector(`#confirmPayment-${planID}`);
                         let dialog=document.querySelector(`#newOrder-${planID}`);
                         btnOpen.addEventListener("click", function(){
-                            dialog.classList.remove("hideBox");
+                            if(getMemID == null){
+                                alert("請先登入");
+                            }else{
+                                dialog.classList.remove("hideBox");
+                            }
                         })
                         btnClose.addEventListener("click", function(){
                             dialog.classList.add("hideBox");
