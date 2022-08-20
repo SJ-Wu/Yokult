@@ -32,6 +32,12 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        .hideBox{
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -72,27 +78,27 @@
     <div style="padding-right: 8%; flex-wrap: wrap  ; display: flex; justify-content: right;">
         <span style="padding-right: 5px;">專案類別</span>
         <form action="" >
-            <select name="category" id="category">
-                <option value="All">所有提案</option>
-                <option value="CleanTool">潔牙物品</option>
-                <option value="Orthodontics">牙齒矯治</option>
-                <option value="Charity">公益活動</option>
-                <option value="HealthEducation">衛教出版</option>
-                <option value="Favorite">我的最愛</option>
+            <select name="category" id="selectCategory">
+                <option value="0">所有提案</option>
+                <option value="1">潔牙物品</option>
+                <option value="2">牙齒矯治</option>
+                <option value="3">公益活動</option>
+                <option value="4">衛教出版</option>
+                <!-- <option value="Favorite">我的最愛</option> -->
             </select>
         </form>
         <span style="padding-left: 10px; padding-right: 10px;">|</span>
 
         <span style="padding-right: 5px;">專案階段</span>
         <form action="" >
-            <select name="status" id="status">
-                <option value="Choice">所有階段</option>
-                <option value="Fundraising">募資中</option>
-                <option value="Completed">已結束</option>
-                <option value="ComingSoon">即將開始</option>
+            <select name="status" id="selectStatus">
+                <option value="0">所有階段</option>
+                <option value="1">即將開始</option>
+                <option value="2">募資中</option>
+                <option value="3">已結束</option>
             </select>
         </form>
-        <span style="padding-left: 10px; padding-right: 10px;">|</span>
+        <!-- <span style="padding-left: 10px; padding-right: 10px;">|</span>
 
         <span style="padding-right: 5px;">專案排序</span>
         <form action="" >
@@ -101,7 +107,7 @@
                 <option value="StartTime">開始時間</option>
                 <option value="EndTime">結束時間</option>
             </select>
-        </form>
+        </form> -->
     </div>
     <!-- Select Options End -->
 
@@ -112,35 +118,7 @@
         <div class="container">
             <div id="MainArea" class="row g-5">
 
-                <!-- <div class="category-Fundrasing col-xl-4 col-lg-6 wow slideInUp" data-wow-delay="0.1s" >
-                    <div class="team-item">
-                        <div class="position-relative rounded-top" style="z-index: 1;">
-                            <a href="propsal-page1.html">
-                                <img class="img-fluid rounded-top w-100" src="clinic\img\fundraising\proposal-1\Thumbnail_main_XXX.jpg" alt="">
-                            </a>
-                            <div class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                <a class="btn btn-primary btn-square m-1" href="javascript:void(0);">
-                                    <i class="fa-regular fa-heart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="team-text position-relative bg-light text-left rounded-bottom p-4">
-                            <p style="margin: 0;">已達標</p>
-                            <p class="text-primary mb-0" style="font-size: small;">社團法人中華民國牙醫師公會全國聯合會</p>
-                            <a href="propsal-page1.html">
-                                <h4 class="mb-2 h5">偏鄉牙醫志工團｜為偏鄉學童巡迴牙齒健檢</h4>
-                            </a>
-                            <div style="margin-top: 15px; height: 4px; background-color: gray;">
-                                <div style="height: 4px; width: 100%; background: lightcoral"></div>
-                            </div>
-
-                            <p style="margin: 0; font-size: small; display: inline;">$ 100,000,000</p>
-                            <div style="display: inline;"> | </div>
-                            <p style="margin: 0; font-size: small; display: inline;">330%</p>
-                            <p style="margin: 0; font-size: small; display: inline; float:right;">已結束</p>
-                        </div>
-                    </div>
-                </div> -->
+                <!-- proposal插入處 -->
 
             </div>
         </div>
@@ -263,7 +241,6 @@
                         let joProposal = jsObject.Proposals[i];
                         let proposalID = joProposal.proposalID;
                         
-                        // let proposalPage = `./fundraising_proposal-${proposalID}.html`;
                         let proposalPage = `fundraising_proposal.html?page=${proposalID}`;
                         let proposalPictureBase64 = joProposal.proposalPictureBase64;
                         
@@ -271,6 +248,7 @@
                         let proposalName = joProposal.proposalName;
                         let currentMillis = joProposal.currentMillis;
                         
+                        let proposalCategoryID = joProposal.proposalCategoryID;
                         let proposalGoal = joProposal.proposalGoal;
                         let proposalAmount = joProposal.proposalAmount;
                         let amountPercent;
@@ -331,9 +309,9 @@
                             proposalAmount = addComma(proposalAmount);
                         }
 
-
-                        let html = `
-                                <div class="category-Fundrasing col-xl-4 col-lg-6 wow slideInUp" data-wow-delay="0.1s" >
+                        var conformInfo = `${proposalID}-${proposalCategoryID}-${showStatusText}-${proposalStartedDateTimeMillis}-${proposalEndedDateTimeMillis}`;
+                        let html_proposal = `
+                                <div id="${conformInfo}" class="category-Fundrasing col-xl-4 col-lg-6 wow slideInUp" data-wow-delay="0.1s" >
                                     <div class="team-item">
                                         <div class="position-relative rounded-top" style="z-index: 1;">
                                             <a href="${proposalPage}">
@@ -363,9 +341,207 @@
                                     </div>
                                 </div>
                             `;
-                        $('#MainArea').append(html);
+                        $('#MainArea').append(html_proposal);
 
                     }
+
+
+                    // 切換專案
+                    $('#selectCategory').on('change', function() {
+                        // console.log("this.value : " + this.value);
+                        for(var i=0 ; i<jsObject.Proposals.length ; i++ ){
+                            ///////////////////////////////////以下，copy上方原碼////////////////////////////////
+                            let joProposal = jsObject.Proposals[i];
+                            let proposalID = joProposal.proposalID;
+                            
+                            let proposalPage = `fundraising_proposal.html?page=${proposalID}`;
+                            let proposalPictureBase64 = joProposal.proposalPictureBase64;
+                            
+                            let proposalHostName = joProposal.proposalHostName;
+                            let proposalName = joProposal.proposalName;
+                            let currentMillis = joProposal.currentMillis;
+                            
+                            let proposalCategoryID = joProposal.proposalCategoryID;
+                            let proposalGoal = joProposal.proposalGoal;
+                            let proposalAmount = joProposal.proposalAmount;
+                            let amountPercent;
+                            let status;
+                            let fontawesome;
+                            let proposalStartedDateTimeMillis = joProposal.proposalStartedDateTimeMillis;
+                            let proposalEndedDateTimeMillis = joProposal.proposalEndedDateTimeMillis;
+                            let showStatusText;
+                            let backgroundColorBase;
+                            let backgroundColor;
+                            let showBarPercent;
+                            let pipe = " | ";
+                            if(proposalAmount / proposalGoal >= 1){
+                                showBarPercent = 100;
+                            }else{
+                                showBarPercent = Math.round((proposalAmount / proposalGoal)*100);
+                            }
+
+                            if(currentMillis < proposalStartedDateTimeMillis){
+                                proposalAmount = "";
+                                amountPercent = "";
+                                pipe = "";
+                                fontawesome = "fa-regular fa-face-surprise ";
+                                status = "敬請期待";
+                                showStatusText = "尚未開始";
+                                backgroundColorBase = "";
+                                backgroundColor = "background-color: rgb(250, 250, 220);";
+                            }else if(currentMillis <= proposalEndedDateTimeMillis){
+                                if(proposalAmount >= proposalGoal){
+                                    fontawesome = "fa-regular fa-face-smile-wink ";      //與已結束相同圖案 !
+                                    status = "已達標";
+                                }else{
+                                    fontawesome = "fa-regular fa-face-rolling-eyes ";
+                                    status = "尚未達標";
+                                }
+                                amountPercent = addComma(roundDecimal(proposalAmount / proposalGoal *100 , 1)) + '%';
+                                showStatusText = "募資中";
+                                backgroundColorBase = "bg-light";
+                                backgroundColor = "";
+                            }else{
+                                if(proposalAmount >= proposalGoal){
+                                    fontawesome = "fa-regular fa-face-smile-wink ";      //與募資中相同圖案 !
+                                    status = "已達標";
+                                }else{
+                                    fontawesome = "fa-regular fa-face-dizzy ";
+                                    status = "未達標";
+                                }
+                                amountPercent = addComma(roundDecimal(proposalAmount / proposalGoal *100 , 1)) + '%';
+                                showStatusText = "已結束";
+                                backgroundColorBase = "";
+                                backgroundColor = "background-color: rgb(220, 220, 220);";
+                            }
+                            // 加逗號
+                            if(proposalGoal != ""){
+                                proposalGoal = '目標：$' + addComma(proposalGoal);
+                            }
+                            if(proposalAmount != ""){
+                                proposalAmount = addComma(proposalAmount);
+                            }
+
+                            var conformInfo = `${proposalID}-${proposalCategoryID}-${showStatusText}-${proposalStartedDateTimeMillis}-${proposalEndedDateTimeMillis}`;
+                            ///////////////////////////////////以上，copy上方原碼////////////////////////////////
+
+                            console.log("==========");
+                            console.log(this.value);
+                            console.log(proposalCategoryID);
+
+                            if(this.value == "0"){
+                                console.log(`this.value == "0" : ${conformInfo}`);
+                                $(`#${conformInfo}`).removeClass("hideBox");
+                            }else if(this.value == proposalCategoryID){
+                                console.log(`this.value == categoryID : ${conformInfo}`);
+                                $(`#${conformInfo}`).removeClass("hideBox");
+                            }else{
+                                console.log(`this.value != categoryID : ${conformInfo}`);
+                                $(`#${conformInfo}`).addClass("hideBox");
+                            }
+
+                        }
+
+                    });
+
+
+                    // 切換專案
+                    $('#selectStatus').on('change', function() {
+                        // console.log("this.value : " + this.value);
+                        for(var i=0 ; i<jsObject.Proposals.length ; i++ ){
+                            ///////////////////////////////////以下，copy上方原碼////////////////////////////////
+                            let joProposal = jsObject.Proposals[i];
+                            let proposalID = joProposal.proposalID;
+                            
+                            let proposalPage = `fundraising_proposal.html?page=${proposalID}`;
+                            let proposalPictureBase64 = joProposal.proposalPictureBase64;
+                            
+                            let proposalHostName = joProposal.proposalHostName;
+                            let proposalName = joProposal.proposalName;
+                            let currentMillis = joProposal.currentMillis;
+                            
+                            let proposalCategoryID = joProposal.proposalCategoryID;
+                            let proposalGoal = joProposal.proposalGoal;
+                            let proposalAmount = joProposal.proposalAmount;
+                            let amountPercent;
+                            let status;
+                            let fontawesome;
+                            let proposalStartedDateTimeMillis = joProposal.proposalStartedDateTimeMillis;
+                            let proposalEndedDateTimeMillis = joProposal.proposalEndedDateTimeMillis;
+                            let showStatusText;
+                            let backgroundColorBase;
+                            let backgroundColor;
+                            let showBarPercent;
+                            let pipe = " | ";
+                            if(proposalAmount / proposalGoal >= 1){
+                                showBarPercent = 100;
+                            }else{
+                                showBarPercent = Math.round((proposalAmount / proposalGoal)*100);
+                            }
+
+                            if(currentMillis < proposalStartedDateTimeMillis){
+                                proposalAmount = "";
+                                amountPercent = "";
+                                pipe = "";
+                                fontawesome = "fa-regular fa-face-surprise ";
+                                status = "敬請期待";
+                                showStatusText = "尚未開始";
+                                backgroundColorBase = "";
+                                backgroundColor = "background-color: rgb(250, 250, 220);";
+                            }else if(currentMillis <= proposalEndedDateTimeMillis){
+                                if(proposalAmount >= proposalGoal){
+                                    fontawesome = "fa-regular fa-face-smile-wink ";      //與已結束相同圖案 !
+                                    status = "已達標";
+                                }else{
+                                    fontawesome = "fa-regular fa-face-rolling-eyes ";
+                                    status = "尚未達標";
+                                }
+                                amountPercent = addComma(roundDecimal(proposalAmount / proposalGoal *100 , 1)) + '%';
+                                showStatusText = "募資中";
+                                backgroundColorBase = "bg-light";
+                                backgroundColor = "";
+                            }else{
+                                if(proposalAmount >= proposalGoal){
+                                    fontawesome = "fa-regular fa-face-smile-wink ";      //與募資中相同圖案 !
+                                    status = "已達標";
+                                }else{
+                                    fontawesome = "fa-regular fa-face-dizzy ";
+                                    status = "未達標";
+                                }
+                                amountPercent = addComma(roundDecimal(proposalAmount / proposalGoal *100 , 1)) + '%';
+                                showStatusText = "已結束";
+                                backgroundColorBase = "";
+                                backgroundColor = "background-color: rgb(220, 220, 220);";
+                            }
+                            // 加逗號
+                            if(proposalGoal != ""){
+                                proposalGoal = '目標：$' + addComma(proposalGoal);
+                            }
+                            if(proposalAmount != ""){
+                                proposalAmount = addComma(proposalAmount);
+                            }
+
+                            var conformInfo = `${proposalID}-${proposalCategoryID}-${showStatusText}-${proposalStartedDateTimeMillis}-${proposalEndedDateTimeMillis}`;
+                            ///////////////////////////////////以上，copy上方原碼////////////////////////////////
+
+                            console.log("==========");
+                            console.log(this.value);
+                            console.log(proposalCategoryID);
+
+                            if(this.value == "0"){
+                                console.log(`this.value == "0" : ${conformInfo}`);
+                                $(`#${conformInfo}`).removeClass("hideBox");
+                            }else if(this.value == proposalCategoryID){
+                                console.log(`this.value == categoryID : ${conformInfo}`);
+                                $(`#${conformInfo}`).removeClass("hideBox");
+                            }else{
+                                console.log(`this.value != categoryID : ${conformInfo}`);
+                                $(`#${conformInfo}`).addClass("hideBox");
+                            }
+
+                        }
+
+                    });
 
                     console.log("Success");
                 },

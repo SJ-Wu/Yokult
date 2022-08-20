@@ -79,6 +79,8 @@
                         <a href="./fundraising_NewProposal.html" style="color: rgb(90, 90, 90);">我要提案</a>
                         <hr>
                         <a href="./fundraising_MyProposal.html" style="color: rgb(90, 90, 90);">我的提案</a>
+                        <hr>
+                        <a href="./fundraising_MyPost.html" style="color: rgb(90, 90, 90);">收件資訊</a>
                     </div>
                 </div>
                 <div class="col-lg-10" style="padding-left:0px; padding-right:0px; border-left: 1px solid gray;">
@@ -166,8 +168,8 @@
             let json;
             var j = {};
             if(getMemID == null){
-            alert("請先登入");
-            window.location.href="memberLogin.html";
+                alert("請先登入");
+                window.location.href="memberLogin.html";
             }else{
                 j.memID = getMemID;
                 json = JSON.stringify(j);
@@ -251,7 +253,7 @@
                         let proposalEndedDateTimeMillis = joProposal.proposalEndedDateTimeMillis;
                         let restDay = roundDecimal( (proposalEndedDateTimeMillis - proposalStartedDateTimeMillis)/1000/60/60/24 );
 
-                        let proposalPage = `./fundraising_proposal-${proposalID}.html`;
+                        let proposalPage = `fundraising_proposal.html?page=${proposalID}`;
 
                         let proposalGoal = joProposal.proposalGoal;
                         let proposalAmount = joProposal.proposalAmount;
@@ -382,7 +384,7 @@
                         `;
                         let html_orders = `
                             <tr>
-                                <td class="text-project"><a href="${proposalPage}">${planName}</a></td>
+                                <td class="text-project">${planName}</td>
                                 <td>${postProcess}</td>
                                 <td>${planPostDate}</td>
                                 <td>${orderDateTime}</td>

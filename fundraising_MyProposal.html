@@ -105,6 +105,8 @@
                         <a href="./fundraising_NewProposal.html" style="color: rgb(90, 90, 90);">我要提案</a>
                         <hr>
                         <a href="./fundraising_MyProposal.html" style="color: rgb(90, 90, 90); font-weight: bolder;">我的提案</a>
+                        <hr>
+                        <a href="./fundraising_MyPost.html" style="color: rgb(90, 90, 90);">收件資訊</a>
                     </div>
                 </div>
                 <div class="col-lg-10" style="padding-left:0px; padding-right:0px; border-left: 1px solid gray;">
@@ -259,7 +261,7 @@
                     let proposalEndedDateTimeMillis = joProposal.proposalEndedDateTimeMillis;
                     let restDay = roundDecimal( (proposalEndedDateTimeMillis - proposalStartedDateTimeMillis)/1000/60/60/24 );
 
-                    let proposalPage = `./fundraising_proposal-${proposalID}.html`;
+                    let proposalPage = `fundraising_proposal.html?page=${proposalID}`;
 
                     let proposalGoal = joProposal.proposalGoal;
                     let proposalAmount = joProposal.proposalAmount;
@@ -274,9 +276,9 @@
                         showBarPercent = Math.round((proposalAmount / proposalGoal)*100);                    }
 
                     if(currentMillis < proposalStartedDateTimeMillis){
-                        proposalGoal = "";
-                        proposalAmount = "";
-                        amountPercent = "";
+                        proposalGoal = "-";
+                        proposalAmount = "-";
+                        amountPercent = "-";
                         status = "敬請期待";
                         showStatusText = "尚未開始";
                     }else if(currentMillis <= proposalEndedDateTimeMillis){
@@ -297,10 +299,10 @@
                         showStatusText = "已結束";
                     }
                     //加逗號
-                    if(proposalGoal != ""){
+                    if(proposalGoal != "-"){
                         proposalGoal = addComma(proposalGoal);
                     }
-                    if(proposalAmount != ""){
+                    if(proposalAmount != "-"){
                         proposalAmount = addComma(proposalAmount);
                     }
 
@@ -360,10 +362,10 @@
 
 
 
-                    // plan新增
+                    // plan新增，為了配對方便，name皆採用雨後端相同名稱（不加 "-${proposalID}"）
                     let html_lightBox_newPlan = `
-                        <form id="newPlan" class="hideBox" method="post" enctype="multipart/form-data" style="margin: 0px; padding: 0px;">
-                            <div id="lightbox-newPlan" class="row g-2" style=" border-radius: 10px; background-color: #84ddfd;
+                        <form id="newPlan-${proposalID}" class="hideBox" method="post" enctype="multipart/form-data" style="margin: 0px; padding: 0px;">
+                            <div id="lightbox-newPlan-${proposalID}" class="row g-2" style=" border-radius: 10px; background-color: #84ddfd;
                             margin-top: 5%; left: 50%; transform: translate(-50%); width: 550px;  height: auto; padding: 15px;
                             position:fixed;z-index: 100;">
                                 <div style="text-align:left; display: inline-block;">新增方案</div>
@@ -374,7 +376,7 @@
                                     <span class="h6">方案名稱：</span>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input maxlength="4" type="text" name="planName" class="form-control bg-light border-0" placeholder="方案名稱" style="height: 25px;" />
+                                    <input maxlength="50" type="text" name="planName" class="form-control bg-light border-0" placeholder="方案名稱" style="height: 25px;" />
                                 </div>
     
                                 <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
@@ -382,7 +384,7 @@
                                     <span class="h6">方案金額：</span>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input maxlength="4" type="text" name="planAmount" class="form-control bg-light border-0" placeholder="方案金額" style="height: 25px;" />
+                                    <input maxlength="11" type="text" name="planAmount" class="form-control bg-light border-0" placeholder="方案金額" style="height: 25px;" />
                                 </div>
     
                                 <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
@@ -390,7 +392,7 @@
                                     <span class="h6">方案內容：</span>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input maxlength="4" type="text" name="planContent" class="form-control bg-light border-0" placeholder="方案內容" style="height: 25px;" />
+                                    <input maxlength="300" type="text" name="planContent" class="form-control bg-light border-0" placeholder="方案內容" style="height: 25px;" />
                                 </div>
                                         
                                 <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
@@ -398,7 +400,7 @@
                                     <span class="h6">寄送資訊：</span>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input maxlength="4" type="text" name="planPostNote" class="form-control bg-light border-0" placeholder="方案寄送資訊" style="height: 25px;" />
+                                    <input maxlength="100" type="text" name="planPostNote" class="form-control bg-light border-0" placeholder="方案寄送資訊" style="height: 25px;" />
                                 </div>
 
                                 <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
@@ -454,13 +456,13 @@
                                 </div>      
                                         
                                 <div class="col-sm-5">
-                                    <button id="confirmNewPlan" class="btn btn-primary py-2" type="button"
+                                    <button id="confirmNewPlan-${proposalID}" class="btn btn-primary py-2" type="button"
                                         style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left: 50%;">
-                                        確認修改
+                                        確認送出
                                     </button>
                                 </div>
                                 <div class="col-sm-5">
-                                    <button id="closeNewPlan" class="btn py-2" type="button"
+                                    <button id="closeNewPlan-${proposalID}" class="btn py-2" type="button"
                                         style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left:30%;
                                         color: #000; background-color: white; border-color: #06a3da;">
                                         取消
@@ -471,24 +473,22 @@
 
                     `;
                     
+                    //新增plan
                     if(currentMillis <= proposalEndedDateTimeMillis){
                         $('body').prepend(html_lightBox_newPlan);
 
-                        let btnCloseNewPlan=document.querySelector(`#closeNewPlan`);
-                        let btnConfirmNewPlan=document.querySelector(`#confirmNewPlan`);
-                        let dialogNewPlan=document.querySelector(`#newPlan`);
+                        let btnCloseNewPlan=document.querySelector(`#closeNewPlan-${proposalID}`);
+                        let btnConfirmNewPlan=document.querySelector(`#confirmNewPlan-${proposalID}`);
+                        let dialogNewPlan=document.querySelector(`#newPlan-${proposalID}`);
                         btnCloseNewPlan.addEventListener("click", function(){
                             dialogNewPlan.classList.add("hideBox");
                         });
                         btnConfirmNewPlan.addEventListener("click", function(){
+                            insertPlan(proposalID);
                             dialogNewPlan.classList.add("hideBox");
                         });
-                    }else{
-                        let btnOpenNewPlan=document.querySelector(`#openNewPlan-${proposalID}`);
-                        btnOpenNewPlan.addEventListener("click", function(){
-                            alert("專案已結束無法新增贊助方案");
-                        });
                     }
+
                     
                     
 
@@ -511,6 +511,14 @@
                         }
                         let planStartedDateTime = plan.planStartedDateTime.split("T")[0];
                         let planEndedDateTime = plan.planEndedDateTime.split("T")[0];
+
+                        let planStartedDateTime_T = plan.planStartedDateTime + "T00:00:00";
+                        let planEndedDateTime_T = plan.planEndedDateTime + "T00:00:00";
+                        let planPostDate_T = plan.planPostDate + "T00:00:00";
+                        console.log(planStartedDateTime_T);
+                        console.log(planEndedDateTime_T);
+                        console.log(planPostDate_T);
+                        
 
                         let planStartedDateTimeMillis = plan.planStartedDateTimeMillis;
                         if(undefined == planStartedDateTimeMillis){
@@ -548,11 +556,14 @@
                                         <td class="text-project" style="padding-left: 10px;">
                                             <a href="javascript:void(0);">
                                                 <i id="removePlan-${planID}" class="fa-regular fa-trash-can" style="color: red; "></i>
-                                                |
-                                                <i id="openPlan-${planID}" class="fa-solid fa-pen"></i>
-                                                |
                                             </a>
-                                            <a href="${proposalPage}">${planName}</a></td>
+                                                |
+                                            <a href="javascript:void(0);">
+                                                <i id="openPlan-${planID}" class="fa-solid fa-pen"></i>
+                                            </a>    
+                                                |
+                                                ${planName}
+                                        </td>
                                         <td>${planStartedDateTime}</td>
                                         <td>${planEndedDateTime}</td>
                                         <td>${planPostDate}</td>
@@ -578,7 +589,7 @@
                                         <span class="h6">方案名稱：</span>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input maxlength="4" type="text" name="${planID}-${planName}" class="form-control bg-light border-0" placeholder="方案名稱" style="height: 25px;" />
+                                        <input maxlength="50" type="text" name="planName" class="form-control bg-light border-0" value="${planName}" style="height: 25px;" />
                                     </div>
         
                                     <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
@@ -586,7 +597,7 @@
                                         <span class="h6">方案金額：</span>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input maxlength="4" type="text" name="${planID}-${planAmount}" class="form-control bg-light border-0" placeholder="方案金額" style="height: 25px;" />
+                                        <input maxlength="11" type="text" name="planAmount" class="form-control bg-light border-0" value="${plan.planAmount}" style="height: 25px;" />
                                     </div>
         
                                     <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
@@ -594,7 +605,7 @@
                                         <span class="h6">方案內容：</span>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input maxlength="4" type="text" name="${planID}-${planContent}" class="form-control bg-light border-0" placeholder="方案內容" style="height: 25px;" />
+                                        <input maxlength="300" type="text" name="planContent" class="form-control bg-light border-0" value="${planContent}" style="height: 25px;" />
                                     </div>
                                             
                                     <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
@@ -602,7 +613,7 @@
                                         <span class="h6">寄送資訊：</span>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input maxlength="4" type="text" name="${planID}-${planPostNote}" class="form-control bg-light border-0" placeholder="方案寄送資訊" style="height: 25px;" />
+                                        <input maxlength="100" type="text" name="planPostNote" class="form-control bg-light border-0" value="${planPostNote}" style="height: 25px;" />
                                     </div>
 
                                     <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
@@ -615,6 +626,7 @@
                                             name="planStartedDateTime"
                                             class="form-control bg-light border-0"
                                             style="cursor: pointer;"
+                                            value="${planStartedDateTime_T}"
                                         />
                                     </div>
 
@@ -628,6 +640,7 @@
                                             name="planEndedDateTime"
                                             class="form-control bg-light border-0"
                                             style="cursor: pointer;"
+                                            value="${planEndedDateTime_T}"
                                         />
                                     </div>
 
@@ -641,31 +654,35 @@
                                             name="planPostDate"
                                             class="form-control bg-light border-0"
                                             style="cursor: pointer;"
+                                            value="${planPostDate_T}"
                                         />
                                     </div>
 
-                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 15px; height: 25px;">
                                         <span class="mb-4 h6" style="display: inline; color: red">*</span>
                                         <span class="h6">方案圖片：</span>
                                     </div>
-                                    <div class="col-sm-9">
+                                    <div class="row col-sm-9" style="padding-top: 5px;"">
                                         <input
                                         type="file"
                                         name="planPicture"
                                         accept="image/png, image/jpg, image/gif, image/jpeg"
-                                        style="margin-top: 5px; float: left;"
+                                        style="margin-top: 5px; float: left; flex: 0 0 auto;width: 60%;"
                                         />
+                                        <div style="margin-top: 8px; flex: 0 0 auto;width: 40%;">
+                                        （請重新上傳）
+                                        </div
                                     </div>      
                                             
                                     <div class="col-sm-5">
-                                        <button id="confirmPlan-${planID}" class="btn btn-primary py-2" type="button"
-                                            style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left: 50%;">
+                                        <button id="sendModifyPlan-${planID}" class="btn btn-primary py-2" type="button"
+                                            style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left: 15%;">
                                             確認修改
                                         </button>
                                     </div>
                                     <div class="col-sm-5">
                                         <button id="closePlan-${planID}" class="btn py-2" type="button"
-                                            style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left:30%;
+                                            style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left:40%;
                                             color: #000; background-color: white; border-color: #06a3da;">
                                             取消
                                         </button>
@@ -673,25 +690,31 @@
                                 </div>
                             </form>
                         `;
-                        // console.log("======= planPurchases :" + planPurchases + ":");
+                        
+
+                        //plan左側操作鈕，沒有人購買才能刪改
                         if(planPurchases == "0"){
                             $('body').prepend(html_lightBox_plan);
 
                             let btnOpen=document.querySelector(`#openPlan-${planID}`);
                             let btnRemove=document.querySelector(`#removePlan-${planID}`);
                             let btnClose=document.querySelector(`#closePlan-${planID}`);
-                            let btnConfirm=document.querySelector(`#confirmPlan-${planID}`);
+                            let btnSendModify=document.querySelector(`#sendModifyPlan-${planID}`);
                             let dialog=document.querySelector(`#modifyPlan-${planID}`);
                             btnOpen.addEventListener("click", function(){
                                 dialog.classList.remove("hideBox");
                             });
                             btnRemove.addEventListener("click", function(){
-                                dialog.classList.add("hideBox");
+                                if (confirm("是否確定要刪除？")) {
+                                    removePlan(planID);
+                                    dialog.classList.add("hideBox");
+                            }
                             });
                             btnClose.addEventListener("click", function(){
                                 dialog.classList.add("hideBox");
                             });
-                            btnConfirm.addEventListener("click", function(){
+                            btnSendModify.addEventListener("click", function(){
+                                modifyPlan(proposalID, planID);
                                 dialog.classList.add("hideBox");
                             });
                         }else{
@@ -722,37 +745,34 @@
                     $(`#planFormBody-${proposalID}`).append(html_planTotal);
 
 
-                    // let btnOpen=document.querySelector(`#found-${planID}`);
-                    // let btnClose=document.querySelector(`#closePayment-${planID}`);
-                    // let btnPay=document.querySelector(`#confirmPayment-${planID}`);
-                    // let dialog=document.querySelector(`#newOrder-${planID}`);
-                    // btnOpen.addEventListener("click", function(){
-                    //     dialog.classList.remove("hideBox");
-                    // })
-                    // btnClose.addEventListener("click", function(){
-                    //     dialog.classList.add("hideBox");
-                    // })
-                    // btnPay.addEventListener("click", function(){
-                    //     dialog.classList.add("hideBox");
-                    // })
+                    //新增方案按鈕（第二部分）
+                    let html_button_newPlan = `
+                        <div id="btn-openNewPlan-${proposalID}" class="${hideBox}">
+                            <button id="openNewPlan-${proposalID}" class="btn btn-primary py-2" type="button"
+                                style=" border-radius: 5px; margin-top: 30px; margin-bottom: 5px; width: 200px; left: 50%;">
+                                新增方案
+                            </button>
+                        </div>
+                    `;
+                    $('#proposalForm').append(html_button_newPlan);
+
+                    if(currentMillis <= proposalEndedDateTimeMillis){
+                        let btnOpenNewPlan=document.querySelector(`#openNewPlan-${proposalID}`);
+                        let dialogNewPlan=document.querySelector(`#newPlan-${proposalID}`);
+                        btnOpenNewPlan.addEventListener("click", function(){
+                            dialogNewPlan.classList.remove("hideBox");
+                        });
+                    }else{
+                        let btnOpenNewPlan=document.querySelector(`#openNewPlan-${proposalID}`);
+                        btnOpenNewPlan.addEventListener("click", function(){
+                            alert("專案已結束無法新增贊助方案");
+                        });
+                    }
+                    
                 }
 
 
-                html_button_newPlan = `
-                    <div class="">
-                        <button id="openNewPlan" class="btn btn-primary py-2" type="button"
-                            style=" border-radius: 5px; margin-top: 30px; margin-bottom: 5px; width: 200px; left: 50%;">
-                            新增方案
-                        </button>
-                    </div>
-                `;
-                $('#proposalForm').append(html_button_newPlan);
-
-                let btnOpenNewPlan=document.querySelector(`#openNewPlan`);
-                let dialogNewPlan=document.querySelector(`#newPlan`);
-                btnOpenNewPlan.addEventListener("click", function(){
-                    dialogNewPlan.classList.remove("hideBox");
-                });
+                
 
 
                 // 切換專案
@@ -761,18 +781,22 @@
                         let proposalID = allProposal[k].proposalID;
                         if(!$(`#proposalFormTable-${proposalID}`).hasClass("hideBox")){
                             //關閉所有表單
-                            $(`#proposalFormTable-${proposalID}`).addClass("hideBox")
+                            $(`#proposalFormTable-${proposalID}`).addClass("hideBox");
                             $(`#planFormTable-${proposalID}`).addClass("hideBox");
                             $(`#proposalButton-${proposalID}`).addClass("hideBox");
+
+                            $(`#btn-openNewPlan-${proposalID}`).addClass("hideBox");
                         }
                     }
                     let value = this.value;
                     $(`#proposalFormTable-${value}`).removeClass("hideBox");
                     $(`#planFormTable-${value}`).removeClass("hideBox");
                     $(`#proposalButton-${value}`).removeClass("hideBox");
+
+                    $(`#btn-openNewPlan-${value}`).removeClass("hideBox");
                 });
 
-            console.log("Success");  
+                console.log("Success");  
             },
             error: function (a,b,c) {
                 console.log(a.responseText);
@@ -791,6 +815,176 @@
     })
 </script>
 
+
+<script>
+    //plan用左側操作鈕刪除plan
+    function removePlan(planID){
+        let json;
+        var j = {};
+        j.planID = planID;
+        json = JSON.stringify(j);
+
+        $.ajax({
+            url: "http://localhost:8080/yokult/fundraising/PlanRemove",           // 資料請求的網址
+            type: "POST",                  // GET | POST | PUT | DELETE | PATCH
+            data: json,                // 將物件資料(不用雙引號) 傳送到指定的 url
+            dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
+            processData: false,
+            contentType: "application/json",
+            timeout: 0,                   // request 可等待的毫秒數 | 0 代表不設定 timeout
+            beforeSend: function(){       // 在 request 發送之前執行
+            },
+            headers: {                    // request 如果有表頭資料想要設定的話
+                // "X-CSRF-Token":"abcde"   // 參考寫法
+            },
+            statusCode: {                 // 狀態碼
+                200: function (res) {
+                },
+                404: function (res) {
+                },
+                500: function (res) {
+                }
+            },
+            success: function(data){      // request 成功取得回應後執行
+                if(data.msg == "PlanRemove success"){
+                    alert("募資方案已刪除");
+                    location.reload();
+                }else{
+                    alert("募資方案刪除失敗");
+                }
+                console.log(data);
+                // console.log(data);
+            },
+            error: function(xhr){         // request 發生錯誤的話執行
+                console.log(xhr);
+            },
+            complete: function(xhr){      // request 完成之後執行(在 success / error 事件之後執行)
+                console.log(xhr);
+            }
+        });
+    }
+
+    
+    //plan用左側操作鈕修改plan
+    function modifyPlan(proposalID, planID){
+        const formData = new FormData($(`#modifyPlan-${planID}`)[0]);
+
+        // var getMemID = sessionStorage.getItem("memID");
+        formData.append("planID",planID);
+        formData.append("proposalID",proposalID);
+        // let json;
+        // var j = {};
+        // j.planID = planID;
+        // json = JSON.stringify(j);
+
+        $.ajax({
+            url: "http://localhost:8080/yokult/fundraising/PlanModify",           // 資料請求的網址
+            type: "POST",                  // GET | POST | PUT | DELETE | PATCH
+            data: formData,                // 將物件資料(不用雙引號) 傳送到指定的 url
+            dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
+            processData: false,
+            contentType: false,
+            timeout: 0,                   // request 可等待的毫秒數 | 0 代表不設定 timeout
+            beforeSend: function(){       // 在 request 發送之前執行
+            },
+            headers: {                    // request 如果有表頭資料想要設定的話
+                // "X-CSRF-Token":"abcde"   // 參考寫法
+            },
+            statusCode: {                 // 狀態碼
+                200: function (res) {
+                },
+                404: function (res) {
+                },
+                500: function (res) {
+                }
+            },
+            success: function(data){      // request 成功取得回應後執行
+                // alert("募資方案已修改");
+                // console.log("//plan用左側操作鈕修改plan : " + data);
+                if(data.msg == "PlanModify success"){
+                    alert("募資方案已修改");
+                    location.reload();
+                }else{
+                    alert("募資方案修改失敗");
+                }
+                console.log(data);
+                // return true;
+            },
+            error: function(xhr){         // request 發生錯誤的話執行
+                console.log(xhr);
+                // return false;
+            },
+            complete: function(xhr){      // request 完成之後執行(在 success / error 事件之後執行)
+                console.log(xhr);
+            }
+        });
+        
+    }
+
+    
+    //plan用左側操作鈕新增plan
+    function insertPlan(proposalID){
+        const formData = new FormData($(`#newPlan-${proposalID}`)[0]);
+
+        // var getMemID = sessionStorage.getItem("memID");
+        formData.append("proposalID",proposalID);
+        // let json;
+        // var j = {};
+        // j.planID = planID;
+        // json = JSON.stringify(j);
+
+        $.ajax({
+            url: "http://localhost:8080/yokult/fundraising/PlanInsert",           // 資料請求的網址
+            type: "POST",                  // GET | POST | PUT | DELETE | PATCH
+            data: formData,                // 將物件資料(不用雙引號) 傳送到指定的 url
+            dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
+            processData: false,
+            contentType: false,
+            timeout: 0,                   // request 可等待的毫秒數 | 0 代表不設定 timeout
+            beforeSend: function(){       // 在 request 發送之前執行
+            },
+            headers: {                    // request 如果有表頭資料想要設定的話
+                // "X-CSRF-Token":"abcde"   // 參考寫法
+            },
+            statusCode: {                 // 狀態碼
+                200: function (res) {
+                },
+                404: function (res) {
+                },
+                500: function (res) {
+                }
+            },
+            success: function(data){      // request 成功取得回應後執行
+                // alert("募資方案已修改");
+                // console.log("//plan用左側操作鈕修改plan : " + data);
+                if(data.msg == "PlanInsert success"){
+                    alert("募資方案已新增");
+                    location.reload();
+                }else{
+                    alert("募資方案新增失敗");
+                }
+                console.log(data);
+                // return true;
+            },
+            error: function(xhr){         // request 發生錯誤的話執行
+                console.log(xhr);
+                // return false;
+            },
+            complete: function(xhr){      // request 完成之後執行(在 success / error 事件之後執行)
+                console.log(xhr);
+            }
+        });
+        
+    }
+</script>
+
+<!-- <script>
+    let btnOpenNewPlan=document.querySelector(`#openNewPlan`);
+    let dialogNewPlan=document.querySelector(`#newPlan`);
+    btnOpenNewPlan.addEventListener("click", function(){
+        dialogNewPlan.classList.remove("hideBox");
+    });
+</script> -->
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
