@@ -34,7 +34,7 @@ $(function () {
     init();
     // $("img.captcha").attr(
     //   "src",
-    //   `http://localhost:8080/yokult/captcha?${new Date().getTime()}`
+    //   `http://35.236.152.197/yokult/captcha?${new Date().getTime()}`
     // );
   });
 

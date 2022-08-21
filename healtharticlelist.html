@@ -205,7 +205,7 @@
 
     <script> 
    
-            fetch('http://localhost:8080/yokult/api/0.01/topic').then((res) => res.json()).then((data) => {
+            fetch('http://35.236.152.197/yokult/api/0.01/topic').then((res) => res.json()).then((data) => {
                 let topics = data;
                 sessionStorage.setItem("topics", JSON.stringify(topics));
                 topics.forEach(e => {
