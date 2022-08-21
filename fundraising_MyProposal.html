@@ -276,7 +276,6 @@
                         showBarPercent = Math.round((proposalAmount / proposalGoal)*100);                    }
 
                     if(currentMillis < proposalStartedDateTimeMillis){
-                        proposalGoal = "-";
                         proposalAmount = "-";
                         amountPercent = "-";
                         status = "敬請期待";
@@ -299,7 +298,7 @@
                         showStatusText = "已結束";
                     }
                     //加逗號
-                    if(proposalGoal != "-"){
+                    if(proposalGoal != ""){
                         proposalGoal = addComma(proposalGoal);
                     }
                     if(proposalAmount != "-"){
