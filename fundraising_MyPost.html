@@ -109,8 +109,8 @@
                         <a href="./fundraising_MyPost.html" style="color: rgb(90, 90, 90); font-weight: bolder;">收件資訊</a>
                     </div>
                 </div>
-                <div class="col-lg-10" style="padding-left:0px; padding-right:0px; border-left: 1px solid gray;">
-                    <div id = proposalForm class="appointment-form d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
+                <div  class="col-lg-10" style="padding-left:0px; padding-right:0px; border-left: 1px solid gray;">
+                    <div id = proposalForm class="appointment-form d-flex flex-column justify-content-center text-center p-5 wow" >
                         <!-- <div style="padding-right: 8%; flex-wrap: wrap  ; display: flex; justify-content: left; margin-bottom: 10px;">
                             <span style="padding-right: 5px;">選擇提案</span>
                             <form action="" >
@@ -124,6 +124,14 @@
 
                         <!-- proposal form位置 -->
 
+                    </div>
+                    <div id = proposalForm class="appointment-form d-flex flex-column justify-content-center text-center p-5 wow">
+                        <div>
+                            <button id="openNewPost" class="btn btn-primary py-2" type="button"
+                                style=" border-radius: 5px; margin-bottom: 5px; width: 200px; left: 50%;">
+                                新增收件人
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -252,7 +260,7 @@
                     let postInformation = `${postLastName} ${postFisrtName} | ${postCellphone} | ${postNumber} ${postCity}${postArea}${postAddress}`;
                     //表單部分
                     let html_post = `
-                        <table>
+                        <table id="post-${postID}">
                             <thead>
                                 <tr>
                                     <td class="column" style="width: 220px;">收件資訊名稱</td>
@@ -261,7 +269,7 @@
                                     <td class="column">收件地址</td>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="post-tbody-${postID}">
                                 <tr>
                                     <td class="text-project" style="padding-left: 10px;">
                                         <a href="javascript:void(0);">
@@ -280,338 +288,241 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <hr>
-                    `;
-                    $('#proposalForm').append(html_post);
-
-
-
-                    // post新增，為了配對方便，name皆採用雨後端相同名稱（不加 "-${memID}"）
-                    let html_lightBox_newPost = `
-                        <form id="newPost" class="hideBox" method="post" enctype="x-www-form-urlencoded" style="margin: 0px; padding: 0px;">
-                            <div id="lightbox-newPost" class="row g-2" style=" border-radius: 10px; background-color: #84ddfd;
-                            margin-top: 5%; left: 50%; transform: translate(-50%); width: 550px;  height: auto; padding: 15px;
-                            position:fixed;z-index: 100;">
-                                <div style="text-align:left; display: inline-block;">新增收件資訊</div>
-                                <hr style="margin-top: 5px; height: 1px; color: black">
-
-                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
-                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
-                                    <span class="h6">收件暱稱：</span>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input maxlength="50" type="text" name="postNickName" class="form-control bg-light border-0" placeholder="請輸入收件暱稱" style="height: 25px;" />
-                                </div>
-                                
-                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
-                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
-                                    <span class="h6">姓氏：</span>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input maxlength="50" type="text" name="postLastName" class="form-control bg-light border-0" placeholder="請輸入姓氏" style="height: 25px;" />
-                                </div>
-    
-                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
-                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
-                                    <span class="h6">名字：</span>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input maxlength="11" type="text" name="postFisrtName" class="form-control bg-light border-0" placeholder="請輸入名字" style="height: 25px;" />
-                                </div>
-    
-                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
-                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
-                                    <span class="h6">行動電話：</span>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input maxlength="300" type="text" name="postCellphone" class="form-control bg-light border-0" placeholder="請輸入行動電話號碼" style="height: 25px;" />
-                                </div>
-                                        
-                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
-                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
-                                    <span class="h6">縣市：</span>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input maxlength="100" type="text" name="postCity" class="form-control bg-light border-0" placeholder="請輸入縣市" style="height: 25px;" />
-                                </div>
-                                                                        
-                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
-                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
-                                    <span class="h6">區域：</span>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input maxlength="100" type="text" name="postArea" class="form-control bg-light border-0" placeholder="請輸入鄉/鎮/區/市" style="height: 25px;" />
-                                </div>
-                                                                        
-                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
-                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
-                                    <span class="h6">地址：</span>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input maxlength="100" type="text" name="postAddress" class="form-control bg-light border-0" placeholder="請輸入地址" style="height: 25px;" />
-                                </div>
-   
-                                        
-                                <div class="col-sm-5">
-                                    <button id="confirmnewPost" class="btn btn-primary py-2" type="button"
-                                        style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left: 50%;">
-                                        確認送出
-                                    </button>
-                                </div>
-                                <div class="col-sm-5">
-                                    <button id="closenewPost" class="btn py-2" type="button"
-                                        style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left:30%;
-                                        color: #000; background-color: white; border-color: #06a3da;">
-                                        取消
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-
-                    `;
-                    
-                    //新增post
-                    $('body').prepend(html_lightBox_newPost);
-
-                    let btnCloseNewPost=document.querySelector(`#closenewPost`);
-                    let btnConfirmNewPost=document.querySelector(`#confirmnewPost`);
-                    let dialogNewPost=document.querySelector(`#newPost`);
-                    btnCloseNewPost.addEventListener("click", function(){
-                        dialogNewPost.classList.add("hideBox");
-                    });
-                    btnConfirmNewPost.addEventListener("click", function(){
-                        insertPost(memID);
-                        dialogNewPost.classList.add("hideBox");
-                    });
-
-
-                    
-                    
-
-                    // //plan部分
-                    // let joPlans = allProposalPlans[i];
-                    // console.log(joPlans);
-                    // let planTotalAmount = 0;
-                    // for(var j=0; j<joPlans.length; j++){
-                    //     let plan = joPlans[j];
-
-                    //     let planID = plan.planID;
-                    //     let planName = plan.planName;
-                    //     let planAmount = addComma(plan.planAmount);
-                    //     let planContent = plan.planContent;
-                    //     let planPostNote = plan.planPostNote;
-                    //     let planPostDate = plan.planPostDate;
-                    //     if(undefined == planPostDate){
-                    //         planPostDate = "-";
-                    //     }else{
-                    //     }
-                    //     let planStartedDateTime = plan.planStartedDateTime.split("T")[0];
-                    //     let planEndedDateTime = plan.planEndedDateTime.split("T")[0];
-
-                    //     let planStartedDateTime_T = plan.planStartedDateTime + "T00:00:00";
-                    //     let planEndedDateTime_T = plan.planEndedDateTime + "T00:00:00";
-                    //     let planPostDate_T = plan.planPostDate + "T00:00:00";
-                    //     console.log(planStartedDateTime_T);
-                    //     console.log(planEndedDateTime_T);
-                    //     console.log(planPostDate_T);
-                        
-
-                    //     let planStartedDateTimeMillis = plan.planStartedDateTimeMillis;
-                    //     if(undefined == planStartedDateTimeMillis){
-                    //         planStartedDateTimeMillis = "-";
-                    //     }
-
-                    //     let planEndedDateTimeMillis = plan.planEndedDateTimeMillis;
-                    //     if(undefined == planEndedDateTimeMillis){
-                    //         planEndedDateTimeMillis = "-";
-                    //     }
-
-                    //     let planPictureBase64 = plan.planPictureBase64;
-                    //     let proposalID = plan.proposalID;
-                    //     let planPurchases = plan.planPurchases;
-                    //     let planAllAmount = addComma(plan.planAmount * planPurchases);
-                    //     planTotalAmount += plan.planAmount * plan.planPurchases;
-
-                    //     let status; 
-                    //     if(currentMillis < proposalStartedDateTimeMillis){
-                    //         status = "尚未開始";
-                    //     }else if(currentMillis <= proposalEndedDateTimeMillis){
-                    //         if(currentMillis < planStartedDateTimeMillis){
-                    //             status = "尚未開始";
-                    //         }else if(currentMillis <= planEndedDateTimeMillis){
-                    //             status = "贊助專案";
-                    //         }else{
-                    //             status = "已結束";
-                    //         }
-                    //     }else{
-                    //         status = "已結束";
-                    //     }
-
-                    //     html_plan = `
-                    //                 <tr>
-                    //                     <td class="text-project" style="padding-left: 10px;">
-                    //                         <a href="javascript:void(0);">
-                    //                             <i id="removePlan-${planID}" class="fa-regular fa-trash-can" style="color: red; "></i>
-                    //                         </a>
-                    //                             |
-                    //                         <a href="javascript:void(0);">
-                    //                             <i id="openPlan-${planID}" class="fa-solid fa-pen"></i>
-                    //                         </a>    
-                    //                             |
-                    //                             ${planName}
-                    //                     </td>
-                    //                     <td>${planStartedDateTime}</td>
-                    //                     <td>${planEndedDateTime}</td>
-                    //                     <td>${planPostDate}</td>
-                    //                     <td>${planAmount}</td>
-                    //                     <td>${planPurchases}</td>
-                    //                     <td>${planAllAmount}</td>
-                    //                 </tr>
-                    //     `;
-                    //     $(`#planFormBody-${proposalID}`).append(html_plan);
-
-
-                        // post修改燈箱
-                        let html_lightBox_post = `
-                            <form id="modifyPost-${postID}" class="hideBox" method="post" enctype="x-www-form-urlencoded" style="margin: 0px; padding: 0px;">
-                                <div id="lightbox-${postID}" class="row g-2" style=" border-radius: 10px; background-color: #84ddfd;
-                                margin-top: 5%; left: 50%; transform: translate(-50%); width: 550px;  height: auto; padding: 15px;
-                                position:fixed;z-index: 100;">
-                                <div style="text-align:left; display: inline-block;">修改收件資訊</div>
-                                <hr style="margin-top: 5px; height: 1px; color: black">
-
-                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
-                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
-                                    <span class="h6">收件暱稱：</span>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input maxlength="50" type="text" name="postNickName" class="form-control bg-light border-0" value="${postNickName}" style="height: 25px;" />
-                                </div>
-                                
-                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
-                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
-                                    <span class="h6">姓氏：</span>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input maxlength="50" type="text" name="postLastName" class="form-control bg-light border-0" value="${postLastName}" style="height: 25px;" />
-                                </div>
-    
-                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
-                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
-                                    <span class="h6">名字：</span>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input maxlength="11" type="text" name="postFisrtName" class="form-control bg-light border-0" value="${postFisrtName}" style="height: 25px;" />
-                                </div>
-    
-                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
-                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
-                                    <span class="h6">行動電話：</span>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input maxlength="300" type="text" name="postCellphone" class="form-control bg-light border-0" value="${postCellphone}" style="height: 25px;" />
-                                </div>
-                                        
-                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
-                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
-                                    <span class="h6">縣市：</span>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input maxlength="100" type="text" name="postCity" class="form-control bg-light border-0"value="${postCity}" style="height: 25px;" />
-                                </div>
-                                                                        
-                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
-                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
-                                    <span class="h6">區域：</span>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input maxlength="100" type="text" name="postArea" class="form-control bg-light border-0" value="${postArea}" style="height: 25px;" />
-                                </div>
-                                                                        
-                                <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
-                                    <span class="mb-4 h6" style="display: inline; color: red">*</span>
-                                    <span class="h6">地址：</span>
-                                </div>
-                                <div class="col-sm-9">
-                                    <input maxlength="100" type="text" name="postAddress" class="form-control bg-light border-0" value="${postAddress}" style="height: 25px;" />
-                                </div>
-   
-                                        
-                                <div class="col-sm-5">
-                                    <button id="sendModifyPost-${postID}" class="btn btn-primary py-2" type="button"
-                                        style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left: 50%;">
-                                        確認送出
-                                    </button>
-                                </div>
-                                <div class="col-sm-5">
-                                    <button id="closePost-${postID}" class="btn py-2" type="button"
-                                        style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left:30%;
-                                        color: #000; background-color: white; border-color: #06a3da;">
-                                        取消
-                                    </button>
-                                </div>
-                                </div>
-                            </form>
+                        <hr id="hr-${postID}">
                         `;
                         
+                        $('#proposalForm').append(html_post);
+                        
+                        
+                        
+                    //新增post，只新增一次
+                    if(i == 0){
+                        // post新增，為了配對方便，name皆採用雨後端相同名稱（不加 "-${memID}"）
+                        let html_lightBox_newPost = `
+                            <form id="newPost" class="hideBox" method="post" enctype="x-www-form-urlencoded" style="margin: 0px; padding: 0px;">
+                                <div id="lightbox-newPost" class="row g-2" style=" border-radius: 10px; background-color: #84ddfd;
+                                margin-top: 5%; left: 50%; transform: translate(-50%); width: 550px;  height: auto; padding: 15px;
+                                position:fixed;z-index: 100;">
+                                    <div style="text-align:left; display: inline-block;">新增收件資訊</div>
+                                    <hr style="margin-top: 5px; height: 1px; color: black">
 
-                        //post左側操作鈕，沒有人購買才能刪改
-                        $('body').prepend(html_lightBox_post);
+                                    <div id="new-postNickName" class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">收件暱稱：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="50" type="text" name="postNickName" class="form-control bg-light border-0" placeholder="請輸入收件暱稱" style="height: 25px;" />
+                                        <div id="msg-postNickName" style='font-size: 10px; color: red;'></div>
+                                    </div>
+                                    
+                                    <div id="new-postLastName" class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">姓氏：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="50" type="text" name="postLastName" class="form-control bg-light border-0" placeholder="請輸入姓氏" style="height: 25px;" />
+                                        <div id="msg-postLastName" style='font-size: 10px; color: red;'></div>
+                                    </div>
+        
+                                    <div id="new-postFisrtName" class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">名字：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="11" type="text" name="postFisrtName" class="form-control bg-light border-0" placeholder="請輸入名字" style="height: 25px;" />
+                                        <div id="msg-postFisrtName" style='font-size: 10px; color: red;'></div>
+                                    </div>
+        
+                                    <div id="new-postCellphone" class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">行動電話：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="300" type="text" name="postCellphone" class="form-control bg-light border-0" placeholder="請輸入行動電話號碼" style="height: 25px;" />
+                                        <div id="msg-postCellphone" style='font-size: 10px; color: red;'></div>
+                                    </div>
+                                            
+                                    <div id="new-postCity" class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">縣市：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="100" type="text" name="postCity" class="form-control bg-light border-0" placeholder="請輸入縣市" style="height: 25px;" />
+                                        <div id="msg-postCity" style='font-size: 10px; color: red;'></div>
+                                    </div>
+                                                                            
+                                    <div id="new-postArea" class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">區域：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="100" type="text" name="postArea" class="form-control bg-light border-0" placeholder="請輸入鄉/鎮/區/市" style="height: 25px;" />
+                                        <div id="msg-postArea" style='font-size: 10px; color: red;'></div>
+                                    </div>
+                                                                            
+                                    <div id="new-postAddress" class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">地址：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="100" type="text" name="postAddress" class="form-control bg-light border-0" placeholder="請輸入地址" style="height: 25px;" />
+                                        <div id="msg-postAddress" style='font-size: 10px; color: red;'></div>
+                                    </div>
+    
+                                            
+                                    <div class="col-sm-5">
+                                        <button id="confirmnewPost" class="btn btn-primary py-2" type="button"
+                                            style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left: 50%;">
+                                            確認送出
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <button id="closenewPost" class="btn py-2" type="button"
+                                            style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left:30%;
+                                            color: #000; background-color: white; border-color: #06a3da;">
+                                            取消
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
 
-                        let btnOpen=document.querySelector(`#openPost-${postID}`);
-                        let btnRemove=document.querySelector(`#removePost-${postID}`);
-                        let btnClose=document.querySelector(`#closePost-${postID}`);
-                        let btnSendModify=document.querySelector(`#sendModifyPost-${postID}`);
-                        let dialog=document.querySelector(`#modifyPost-${postID}`);
-                        btnOpen.addEventListener("click", function(){
-                            dialog.classList.remove("hideBox");
+                        `;
+                    
+                        $('body').prepend(html_lightBox_newPost);
+                        
+                        let btnCloseNewPost=document.querySelector(`#closenewPost`);
+                        let btnConfirmNewPost=document.querySelector(`#confirmnewPost`);
+                        let dialogNewPost=document.querySelector(`#newPost`);
+                        btnCloseNewPost.addEventListener("click", function(){
+                            dialogNewPost.classList.add("hideBox");
                         });
-                        btnRemove.addEventListener("click", function(){
-                            if (confirm("是否確定要刪除？")) {
-                                removePost(postID);
-                                dialog.classList.add("hideBox");
-                            }
+                        btnConfirmNewPost.addEventListener("click", function(){
+                            insertPost(memID, dialogNewPost);
+                            // dialogNewPost.classList.add("hideBox");
                         });
-                        btnClose.addEventListener("click", function(){
+                    }
+
+
+
+
+
+                    // post修改燈箱
+                    let html_lightBox_post = `
+                        <form id="modifyPost-${postID}" class="hideBox" method="post" enctype="x-www-form-urlencoded" style="margin: 0px; padding: 0px;">
+                            <div id="lightbox-${postID}" class="row g-2" style=" border-radius: 10px; background-color: #84ddfd;
+                            margin-top: 5%; left: 50%; transform: translate(-50%); width: 550px;  height: auto; padding: 15px;
+                            position:fixed;z-index: 100;">
+                            <div style="text-align:left; display: inline-block;">修改收件資訊</div>
+                            <hr style="margin-top: 5px; height: 1px; color: black">
+
+                            <div class="col-sm-10 hideBox">
+                                <input maxlength="50" type="text" name="postID" class="form-control bg-light border-0" value="${postID}" style="height: 25px;" />
+                            </div>
+
+                            <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                <span class="h6">收件暱稱：</span>
+                            </div>
+                            <div class="col-sm-9">
+                                <input maxlength="50" type="text" name="postNickName" class="form-control bg-light border-0" value="${postNickName}" style="height: 25px;" />
+                            </div>
+                            
+                            <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                <span class="h6">姓氏：</span>
+                            </div>
+                            <div class="col-sm-9">
+                                <input maxlength="50" type="text" name="postLastName" class="form-control bg-light border-0" value="${postLastName}" style="height: 25px;" />
+                            </div>
+
+                            <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                <span class="h6">名字：</span>
+                            </div>
+                            <div class="col-sm-9">
+                                <input maxlength="11" type="text" name="postFisrtName" class="form-control bg-light border-0" value="${postFisrtName}" style="height: 25px;" />
+                            </div>
+
+                            <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                <span class="h6">行動電話：</span>
+                            </div>
+                            <div class="col-sm-9">
+                                <input maxlength="300" type="text" name="postCellphone" class="form-control bg-light border-0" value="${postCellphone}" style="height: 25px;" />
+                            </div>
+                                    
+                            <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                <span class="h6">縣市：</span>
+                            </div>
+                            <div class="col-sm-9">
+                                <input maxlength="100" type="text" name="postCity" class="form-control bg-light border-0"value="${postCity}" style="height: 25px;" />
+                            </div>
+                                                                    
+                            <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                <span class="h6">區域：</span>
+                            </div>
+                            <div class="col-sm-9">
+                                <input maxlength="100" type="text" name="postArea" class="form-control bg-light border-0" value="${postArea}" style="height: 25px;" />
+                            </div>
+                                                                    
+                            <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                <span class="h6">地址：</span>
+                            </div>
+                            <div class="col-sm-9">
+                                <input maxlength="100" type="text" name="postAddress" class="form-control bg-light border-0" value="${postAddress}" style="height: 25px;" />
+                            </div>
+
+                                    
+                            <div class="col-sm-5">
+                                <button id="sendModifyPost-${postID}" class="btn btn-primary py-2" type="button"
+                                    style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left: 50%;">
+                                    確認送出
+                                </button>
+                            </div>
+                            <div class="col-sm-5">
+                                <button id="closePost-${postID}" class="btn py-2" type="button"
+                                    style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left:30%;
+                                    color: #000; background-color: white; border-color: #06a3da;">
+                                    取消
+                                </button>
+                            </div>
+                            </div>
+                        </form>
+                    `;
+                    
+
+                    //post左側操作鈕，沒有人購買才能刪改
+                    $('body').prepend(html_lightBox_post);
+
+                    let btnOpen=document.querySelector(`#openPost-${postID}`);
+                    let btnRemove=document.querySelector(`#removePost-${postID}`);
+                    let btnClose=document.querySelector(`#closePost-${postID}`);
+                    let btnSendModify=document.querySelector(`#sendModifyPost-${postID}`);
+                    let dialog=document.querySelector(`#modifyPost-${postID}`);
+                    btnOpen.addEventListener("click", function(){
+                        dialog.classList.remove("hideBox");
+                    });
+                    btnRemove.addEventListener("click", function(){
+                        if (confirm("是否確定要刪除？")) {
+                            removePost(postID);
                             dialog.classList.add("hideBox");
-                        });
-                        btnSendModify.addEventListener("click", function(){
-                            modifyPost(postID);
-                            dialog.classList.add("hideBox");
+                        }
+                    });
+                    btnClose.addEventListener("click", function(){
+                        dialog.classList.add("hideBox");
+                    });
+                    btnSendModify.addEventListener("click", function(){
+                        modifyPost(postID);
+                        dialog.classList.add("hideBox");
 
-                        });
-
-
-
-
-
-                    // }
-
-                    // planTotalAmount = addComma(planTotalAmount);
-                    // html_planTotal = `
-                    //             <tr class="summary">
-                    //                 <td class="column">合計</td>
-                    //                 <td colspan="5"></td>
-                    //                 <td class="column">${planTotalAmount}</td>
-                    //             </tr>
-                    // `;
-                    // $(`#planFormBody-${proposalID}`).append(html_planTotal);
-
+                    });
 
                     
                 }
-                
-                //新增方案按鈕（第二部分）
-                let html_button_newPost = `
-                    <div>
-                        <button id="openNewPost" class="btn btn-primary py-2" type="button"
-                            style=" border-radius: 5px; margin-top: 30px; margin-bottom: 5px; width: 200px; left: 50%;">
-                            新增收件人
-                        </button>
-                    </div>
-                `;
-                $('#proposalForm').append(html_button_newPost);
-
+ 
 
                 let btnOpenNewPost=document.querySelector(`#openNewPost`);
                 let dialogNewPost=document.querySelector(`#newPost`);
@@ -635,10 +546,18 @@
                 console.log("Complete");
             },
         });
-
-        
     })
 </script>
+        
+
+
+
+
+
+
+
+
+
 
 
 <script>
@@ -673,8 +592,13 @@
             },
             success: function(data){      // request 成功取得回應後執行
                 if(data.msg == "PostRemove success"){
+
+                    let postID = data.postID;
+                    $(`#post-${postID}`).remove();
+                    $(`#hr-${postID}`).remove();
+
                     alert("收件人資訊已刪除");
-                    location.reload();
+                    // location.reload();
                 }else{
                     alert("收件人資訊刪除失敗");
                 }
@@ -728,8 +652,62 @@
                 // alert("收件人資訊已修改");
                 // console.log("//post用左側操作鈕修改post : " + data);
                 if(data.msg == "PostModify success"){
+
+                    let joPost = data.Post;
+                    let postID = joPost.postID;
+                    let postFisrtName = joPost.postFisrtName;
+                    let postLastName = joPost.postLastName;
+                    let postCellphone = joPost.postCellphone;
+                    let post_SID = joPost.post_SID;
+                    let postAddress = joPost.postAddress;
+                    let postCity = joPost.postCity;
+                    let postArea = joPost.postArea;
+                    let postNumber = joPost.postNumber;
+                    let postNickName = joPost.postNickName;
+                    let memID = joPost.memID;
+                    console.log(postNickName);
+                    let html_post_tbody =`
+                        <tbody id="post-tbody-${postID}">
+                            <tr>
+                                <td class="text-project" style="padding-left: 10px;">
+                                    <a href="javascript:void(0);">
+                                        <i id="removePost-${postID}" class="fa-regular fa-trash-can" style="color: red; "></i>
+                                    </a>
+                                    |
+                                    <a href="javascript:void(0);">
+                                        <i id="openPost-${postID}" class="fa-solid fa-pen"></i>
+                                    </a>    
+                                    |
+                                    ${postNickName}
+                                </td>
+                                <td>${postLastName} ${postFisrtName}</td>
+                                <td>${postCellphone}</td>
+                                <td>${postNumber} ${postCity}${postArea}${postAddress}</td>
+                            </tr>
+                        </tbody>
+                    `;
+
+                    $(`#post-tbody-${postID}`).replaceWith(html_post_tbody);
+
+
+                    let btnOpen=document.querySelector(`#openPost-${postID}`);
+                    let btnRemove=document.querySelector(`#removePost-${postID}`);
+                    // let btnClose=document.querySelector(`#closePost-${postID}`);
+                    // let btnSendModify=document.querySelector(`#sendModifyPost-${postID}`);
+                    let dialog=document.querySelector(`#modifyPost-${postID}`);
+                    btnOpen.addEventListener("click", function(){
+                        dialog.classList.remove("hideBox");
+                    });
+                    btnRemove.addEventListener("click", function(){
+                        if (confirm("是否確定要刪除？")) {
+                            removePost(postID);
+                            dialog.classList.add("hideBox");
+                        }
+                    });
+
+
                     alert("收件人資訊已修改");
-                    location.reload();
+                    // location.reload();
                 }else{
                     alert("收件人資訊修改失敗");
                 }
@@ -749,9 +727,9 @@
 
     
     //post用左側操作鈕新增post
-    function insertPost(memID){
+    function insertPost(memID, dialogNewPost){
         const formData = new FormData($(`#newPost`)[0]);
-
+        formData.delete("postID");
         // var getMemID = sessionStorage.getItem("memID");
         formData.append("memID",memID);
         // let json;
@@ -784,9 +762,228 @@
                 // alert("收件人資訊已修改");
                 // console.log("//post用左側操作鈕修改post : " + data);
                 if(data.msg == "PostInsert success"){
+
+                    let joPost = data.Post;
+                    let postID = joPost.postID;
+                    let postFisrtName = joPost.postFisrtName;
+                    let postLastName = joPost.postLastName;
+                    let postCellphone = joPost.postCellphone;
+                    let post_SID = joPost.post_SID;
+                    let postAddress = joPost.postAddress;
+                    let postCity = joPost.postCity;
+                    let postArea = joPost.postArea;
+                    let postNumber = joPost.postNumber;
+                    let postNickName = joPost.postNickName;
+                    let memID = joPost.memID;
+
+                    let postInformation = `${postLastName} ${postFisrtName} | ${postCellphone} | ${postNumber} ${postCity}${postArea}${postAddress}`;
+                    //表單部分
+                    let html_post = `
+                        <table id="post-${postID}">
+                            <thead>
+                                <tr>
+                                    <td class="column" style="width: 220px;">收件資訊名稱</td>
+                                    <td class="column" style="width: 150px;">收件人姓名</td>
+                                    <td class="column" style="width: 120px;">收件人電話</td>
+                                    <td class="column">收件地址</td>
+                                </tr>
+                            </thead>
+                            <tbody id="post-tbody-${postID}">
+                                <tr>
+                                    <td class="text-project" style="padding-left: 10px;">
+                                        <a href="javascript:void(0);">
+                                            <i id="removePost-${postID}" class="fa-regular fa-trash-can" style="color: red; "></i>
+                                        </a>
+                                        |
+                                        <a href="javascript:void(0);">
+                                            <i id="openPost-${postID}" class="fa-solid fa-pen"></i>
+                                        </a>    
+                                        |
+                                        ${postNickName}
+                                    </td>
+                                    <td>${postLastName} ${postFisrtName}</td>
+                                    <td>${postCellphone}</td>
+                                    <td>${postNumber} ${postCity}${postArea}${postAddress}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr id="hr-${postID}">
+                    `;
+                    $('#proposalForm').append(html_post);
+
+
+
+                    // post修改燈箱
+                    let html_lightBox_post = `
+                            <form id="modifyPost-${postID}" class="hideBox" method="post" enctype="x-www-form-urlencoded" style="margin: 0px; padding: 0px;">
+                                <div id="lightbox-${postID}" class="row g-2" style=" border-radius: 10px; background-color: #84ddfd;
+                                margin-top: 5%; left: 50%; transform: translate(-50%); width: 550px;  height: auto; padding: 15px;
+                                position:fixed;z-index: 100;">
+                                    <div style="text-align:left; display: inline-block;">修改收件資訊</div>
+                                    <hr style="margin-top: 5px; height: 1px; color: black">
+
+                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">收件暱稱：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="50" type="text" name="postNickName" class="form-control bg-light border-0" value="${postNickName}" style="height: 25px;" />
+                                    </div>
+                                    
+                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">姓氏：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="50" type="text" name="postLastName" class="form-control bg-light border-0" value="${postLastName}" style="height: 25px;" />
+                                    </div>
+        
+                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">名字：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="11" type="text" name="postFisrtName" class="form-control bg-light border-0" value="${postFisrtName}" style="height: 25px;" />
+                                    </div>
+        
+                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">行動電話：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="300" type="text" name="postCellphone" class="form-control bg-light border-0" value="${postCellphone}" style="height: 25px;" />
+                                    </div>
+                                            
+                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">縣市：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="100" type="text" name="postCity" class="form-control bg-light border-0"value="${postCity}" style="height: 25px;" />
+                                    </div>
+                                                                            
+                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">區域：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="100" type="text" name="postArea" class="form-control bg-light border-0" value="${postArea}" style="height: 25px;" />
+                                    </div>
+                                                                            
+                                    <div class="col-sm-2" style=" display: flex; align-items: center; min-width: 115px; padding-top: 10px; height: 25px;">
+                                        <span class="mb-4 h6" style="display: inline; color: red">*</span>
+                                        <span class="h6">地址：</span>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input maxlength="100" type="text" name="postAddress" class="form-control bg-light border-0" value="${postAddress}" style="height: 25px;" />
+                                    </div>
+    
+                                            
+                                    <div class="col-sm-5">
+                                        <button id="sendModifyPost-${postID}" class="btn btn-primary py-2" type="button"
+                                            style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left: 50%;">
+                                            確認送出
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <button id="closePost-${postID}" class="btn py-2" type="button"
+                                            style=" border-radius: 5px; position: relative; margin-top: 30px; margin-bottom: 5px; width: 150px; left:30%;
+                                            color: #000; background-color: white; border-color: #06a3da;">
+                                            取消
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        `;
+                        
+
+                        //post左側操作鈕，沒有人購買才能刪改
+                        $('body').prepend(html_lightBox_post);
+
+                        let btnOpen=document.querySelector(`#openPost-${postID}`);
+                        let btnRemove=document.querySelector(`#removePost-${postID}`);
+                        let btnClose=document.querySelector(`#closePost-${postID}`);
+                        let btnSendModify=document.querySelector(`#sendModifyPost-${postID}`);
+                        let dialog=document.querySelector(`#modifyPost-${postID}`);
+                        btnOpen.addEventListener("click", function(){
+                            dialog.classList.remove("hideBox");
+                        });
+                        btnRemove.addEventListener("click", function(){
+                            if (confirm("是否確定要刪除？")) {
+                                removePost(postID);
+                                dialog.classList.add("hideBox");
+                            }
+                        });
+                        btnClose.addEventListener("click", function(){
+                            dialog.classList.add("hideBox");
+                        });
+                        btnSendModify.addEventListener("click", function(){
+                            modifyPost(postID);
+                            dialog.classList.add("hideBox");
+
+                        });
+
                     alert("收件人資訊已新增");
-                    location.reload();
+                    dialogNewPost.classList.add("hideBox");
+                    // location.reload();
                 }else{
+                    console.log(data);
+                    let joPost = data.Post;
+                    console.log(joPost);
+                    console.log(joPost);
+                    let postID = joPost.postID;
+                    let postFisrtName = joPost.postFisrtName;
+                    let postLastName = joPost.postLastName;
+                    let postCellphone = joPost.postCellphone;
+                    let post_SID = joPost.post_SID;
+                    let postAddress = joPost.postAddress;
+                    let postCity = joPost.postCity;
+                    let postArea = joPost.postArea;
+                    let postNumber = joPost.postNumber;
+                    let postNickName = joPost.postNickName;
+                    let memID = joPost.memID;
+
+
+                    if(postNickName == undefined || postNickName == ""){
+                        $('#msg-postNickName').html("資料未輸入或超過20個字！");
+                    }else{
+                        $('#msg-postNickName').html("");
+                    }
+                    if(postLastName == undefined || postLastName == ""){
+                        $('#msg-postLastName').html("資料未輸入或超過20個字！");
+                    }else{
+                        $('#msg-postLastName').html("");
+                    }
+                    if(postFisrtName == undefined || postFisrtName == ""){
+                        $('#msg-postFisrtName').html("資料未輸入或超過50個字！");
+                    }else{
+                        $('#msg-postFisrtName').html("");
+                    }
+                    if(postCellphone == undefined || postCellphone == ""){
+                        $('#msg-postCellphone').html("資料未輸入或格式錯誤！");
+                    }else{
+                        $('#msg-postCellphone').html("");
+                    }
+                    if(postCity == undefined || postCity == ""){
+                        $('#msg-postCity').html("資料未輸入或與行政區資料未匹配！");
+                    }else{
+                        $('#msg-postCity').html("");
+                    }
+                    if(postArea == undefined || postArea == ""){
+                        $('#msg-postArea').html("資料未輸入或與縣市資料未匹配！");
+                    }else{
+                        $('#msg-postArea').html("");
+                    }
+                    if(postAddress == undefined || postAddress == ""){
+                        $('#msg-postAddress').html("資料未輸入或格式錯誤！");
+                    }else{
+                        $('#msg-postAddress').html("");
+                    }
+                    
+
+                        
+                    // dialogNewPost.classList.add("hideBox");
+                    
                     alert("收件人資訊新增失敗");
                 }
                 console.log(data);
@@ -802,15 +999,9 @@
         });
         
     }
+
 </script>
 
-<!-- <script>
-    let btnOpenNewPost=document.querySelector(`#openNewPost`);
-    let dialogNewPost=document.querySelector(`#newPost`);
-    btnOpenNewPost.addEventListener("click", function(){
-        dialogNewPost.classList.remove("hideBox");
-    });
-</script> -->
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
